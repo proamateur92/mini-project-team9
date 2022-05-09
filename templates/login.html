@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>뮤플리 - 로그인페이지</title>
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -37,33 +37,58 @@
                     }
                 })
             }
+
+            function idCheck() {
+
+            }
+
+            function buttonShow() {
+                $('.id-checker').toggleClass('hidden');
+                $('.real-join').toggleClass('hidden');
+                $('.cancel').toggleClass('hidden');
+                $('.fake-join').toggleClass('hidden');
+                $('.login').toggleClass('hidden');
+            }
+
+            function cancel() {
+                $('.id-checker').toggleClass('hidden');
+                $('.real-join').toggleClass('hidden');
+                $('.cancel').toggleClass('hidden');
+                $('.fake-join').toggleClass('hidden');
+                $('.login').toggleClass('hidden');
+            }
+
             function join() {
                 window.location.href = '/join';
             }
         </script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="#"><i class="fa-brands fa-spotify fa-3x"></i></a>
-        </div>
-        <nav class="nav-bar">
-            <ul class="nav__item">
-                <a href="#">
-                    <li class="nav__list">로그인</li>
-                </a>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="login-container">
-        <h1 class="project-title">뮤플리</h1>
-        <input type="text" id="userid" placeholder="아이디"/>
-        <input type="password" id="userpw" placeholder="비밀번호" />
-        <div class="button-container">
-            <button onclick="login()">로그인</button>
-            <button onclick="join()">회원가입</button>
-        </div>
-    </section>
+    <div class="wrap">
+        <header>
+            <div class="logo">
+                <a href="#"><i class="fa-brands fa-spotify fa-3x"></i></a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__item">
+                    <a href="#">
+                        <li class="nav__list">뮤직차트</li>
+                    </a>
+                </ul>
+            </nav>
+        </header>
+        <section class="login-container">
+            <h1 class="login-title">뮤플리</h1>
+            <input class="login-id" type="text" id="userid" maxlength="14" placeholder="아이디"/>
+            <input class="login-pw" type="password" id="userpw" placeholder="비밀번호" />
+            <button class="id-checker hidden" onclick="idCheck()">중복체크</button>
+            <div class="button-container">
+                <button class="login" onclick="login()">로그인</button>
+                <button class="real-join hidden" onclick="join()">회원가입</button>
+                <button class="cancel hidden" onclick="cancel()">취소</button>
+                <button class="fake-join" onclick="buttonShow()">회원가입</button>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
