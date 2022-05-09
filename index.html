@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>로그인</title>
+
+    <style>
+        .artist-main-info {
+            background-color: green;
+
+            width: 1200px;
+            height: 1500px;
+            color: white;
+
+            margin: 0 auto;
+            margin-top: 30px;
+
+            background-size: cover;
+            background-position: center;
+            padding-top: 40px;
+        }
+        .music-info {
+            background-color: orange;
+            width: 92%;
+            height: 520px;
+            margin: 0 auto;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: left;
+        }
+        .song-image {
+
+            background-color: red;
+
+            width: 300px;
+            height: 500px;
+
+            margin-left: 10px;
+
+            padding: 200px;
+        }
+        .song-info {
+
+            background-color: red;
+
+            width: 400px;
+            height: 500px;
+            text-align: justify;
+            margin-left: 10px;
+            white-space:nowrap;
+
+        }
+        .review {
+            background-color: orange;
+            width: 92%;
+            text-align: left;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .txt {
+            margin-left: 20px;
+            padding: 10px;
+        }
+        .review-moeum {
+            margin-left: 20px;
+        }
+        .input-group mb-3 {
+            background-color: pink;
+            width: 92%;
+
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .input {
+            width: 92%;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .items {
+            width: 80%;
+
+        }
+        .name {
+            width: 30px;
+        }
+        #myform fieldset {
+            display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+            border: 0; /* 필드셋 테두리 제거 */
+        }
+        #myform input[type=radio] {
+            display: none; /* 라디오박스 감춤 */
+        }
+        #myform label {
+            font-size: 1em; /* 이모지 크기 */
+            color: transparent; /* 기존 이모지 컬러 제거 */
+            text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+        }
+        #myform label:hover {
+            text-shadow: 0 0 0 #fff326; /* 마우스 호버 */
+        }
+        #myform label:hover ~ label {
+            text-shadow: 0 0 0 #fff326; /* 마우스 호버 뒤에오는 이모지들 */
+        }
+        #myform fieldset {
+            display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+            direction: rtl; /* 이모지 순서 반전 */
+            border: 0; /* 필드셋 테두리 제거 */
+        }
+        #myform fieldset legend {
+            text-align: left;
+        }
+        #myform input[type=radio]:checked ~ label {
+            text-shadow: 0 0 0 #fff326; /* 마우스 클릭 체크 */
+        }
+
+    </style>
+</head>
+<body>
+<div class="artist-main-info">
+    <div class="music-info">
+        <div class="song-image">
+            <a href=""></a>
+            <h5>sss</h5>
+        </div>
+        <div class="song-info">
+            <h2 class="name">이름</h2>
+            <p>b</p>
+            <p>c</p>
+            <p>d</p>
+        </div>
+    </div>
+
+    <div class="review">
+        <h2 class="txt">리뷰 모음</h2>
+        <div class="review-moeum" id="review-list">
+
+        </div>
+    </div>
+    <div class="input">
+        <input class="items" style="width: 60%; border-radius: 5px; ">
+        <form name="myform" id="myform" method="post" action="./save" style="margin-left: 5px;">
+            <fieldset>
+                <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+                <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+                <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+                <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+                <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+            </fieldset>
+        </form>
+        <button class="items" type="button" style="width: 80px; border-radius: 5px; margin-left: 5px;">Button</button>
+    </div>
+</div>
+
+
+</body>
+</html>
