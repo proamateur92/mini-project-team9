@@ -13,11 +13,40 @@
             crossorigin="anonymous"></script>
 
     <script>
+        $(document).ready(function (){
+            show_order();
+        });
+        function show_order() {
+            $.ajax({
+                type: "GET",
+                url: "/musiclist",
+                data: {},
+                success: function (response) {
+                    let rows = response['musics']
+                    for(let i = 0; i < rows.length; i++){
+                        let title = rows[i]['title']
+                        let singer = rows[i]['singer']
+                        let albumtitle = rows[i]['albumtitle']
+
+                        let temp_html = `<tr>
+                                                <th >${title}</th>
+                                                <td>앨범자켓들어갈자리</td>
+                                                <td>${singer}</td>
+                                                <td>${albumtitle}</td>
+                                            </tr>`
+
+                        $('#show_order').append(temp_html)
 
 
 
 
-      </script>
+                    }
+                }
+            })
+        }
+
+
+    </script>
 
     <title>뮤플리</title>
 
@@ -63,9 +92,6 @@
         }
 
 
-
-
-
         .categori {
             color: gray;
         }
@@ -100,11 +126,7 @@
     <script>
 
 
-
-
-
-
-      </script>
+    </script>
 </head>
 
 <body>
@@ -117,39 +139,21 @@
     </div>
 
 
-
 </div>
 <table class="table">
-  <thead>
+    <thead>
     <tr class="categori">
-      <th scope="col">NO.</th>
-      <th scope="col">커버</th>
-      <th scope="col">아티스트</th>
-      <th scope="col">앨범</th>
+        <th scope="col">목록</th>
+        <th scope="col">커버</th>
+        <th scope="col">아티스트</th>
+        <th scope="col">앨범</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    </thead>
+    <tbody id="show_order">
 
 
 
-  </tbody>
+    </tbody>
 </table>
 
 
