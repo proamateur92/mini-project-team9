@@ -55,8 +55,9 @@ a {
 }
 input, button {
 	font-family: 'Dongle', sans-serif;
-	border: none;
     font-size: 30px;
+	border: none;
+	outline: none;
 }
 button {
 	border-radius: 5px;

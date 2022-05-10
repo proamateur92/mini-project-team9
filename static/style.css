@@ -1,5 +1,6 @@
 @import "reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
+@import url('./screen/login.css');
 :root {
     /*color*/
     --main-color: #1da2ff;
@@ -12,61 +13,5 @@ html,
 body {
     width: 100%;
     height: 100%;
-    margin: 0;
 }
 
-body {
-    background:  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../static/image/cover.jpg") center/cover no-repeat;
-}
-
-header {
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 40px
-}
-
-.nav__list {
-    font-size: 45px;
-    font-weight: 400;
-    color: var(--main-color);
-}
-
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    margin: 30px auto 0 auto;
-    padding: 30px;
-}
-
-.project-title {
-    font-size: 65px;
-    font-weight: 700;
-    color: var(--main-color);
-    margin-bottom: 20px;
-}
-
-.login-container input {
-    margin-top: 10px;
-    background-color: inherit;
-    border-bottom: 1px solid var(--white);
-    color: var(--white);
-}
-
-.login-container input::placeholder {
-    color: var(--white);
-}
-
-.button-container {
-    margin-top: 10px;
-}
-
-.button-container button {
-    cursor: pointer;
-    background-color: var(--main-color);
-    color: var(--white);
-    margin: 5px 4px;
-}
