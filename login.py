@@ -15,20 +15,49 @@ import datetime
 import hashlib
 
 
-@app.route('/')
-def home():
-    # 로그인 여부 토큰 값이 쿠키에 저장되어있는지 확인
+@app.route('/write_review', methods=['POST'])
+def write_review():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('mainpage.html', id=user_info["id"])
+        # 리뷰 작성 - DB 작업
+        print('리뷰 작성할 아이디', user_info['id'])
+        return render_template('detailTest.html', id=user_info["id"])
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+        return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 
+# 상세 페이지 예제 코드
+@app.route('/detail')
+def detail():
+    token_receive = request.cookies.get('mytoken')
+    return render_template('detailTest.html', token=token_receive)
 
+# 토큰 값 가져오기 예제 코드
+@app.route('/hey', methods=['POST'])
+def hey():
+    token_receive = request.cookies.get('mytoken')
+    # text 받아오기
+    # text = request.form['text']
+    result = False
+    if token_receive:
+        result = True
+    return jsonify({'result': result})
+
+@app.route('/')
+def home():
+    token_receive = request.cookies.get('mytoken')
+    return render_template('mainTest.html', token=token_receive)
+
+# token_receive = request.cookies.get('mytoken')
+# try:
+#     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#     user_info = db.user.find_one({"id": payload['id']})
+#     return render_template('mainpage.html', id=user_info["id"])
+# except jwt.exceptions.DecodeError:
+#     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 @app.route('/loginForm')
-def login():
+def loginForm():
     msg = request.args.get("msg")
     return render_template('loginForm.html', msg=msg)
 
@@ -76,7 +105,6 @@ def user_login():
     if result is not None:
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -87,6 +115,6 @@ def user_login():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    login.run('0.0.0.0', port=5000, debug=True)
 
 
