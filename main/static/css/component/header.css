@@ -5,3 +5,7 @@
 .nav__item a {
     margin-left: 30px;
 }
+
+#logout {
+    cursor: pointer;
+}

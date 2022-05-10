@@ -10,9 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-
-    <title>로그인</title>
+    <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
+    <script src="../static/js/logout.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/detailstyle.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>상세페이지</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -43,7 +45,6 @@
 
 
                                  `
-
                         $('#music-info').append(temp_html)
                     }
                 }
@@ -63,7 +64,6 @@
                         let album = rows[i]['album']
 
                         let temp_html = `
-
                                                <h2 class="title">${title}</h2>
 
                                         <li class="list">
@@ -101,11 +101,11 @@
                     for (let i = 0; i < rows.length; i++) {
                         let comment = rows[i]['comment']
                         let star = rows[i]['star']
-
+                        let id = rows[i]['id']
 
                         let temp_html = `<li class="review-doc">
                                             <span class="review-text" id="review-id">
-                                                닉네임
+                                                ${id}
                                             </span>
                                             <span class="review-text" id="review-comment">
                                                 ${comment}
@@ -117,16 +117,13 @@
                                                 작성시간
                                             </span>
                                         </li>`
-
                         $('#review-box').append(temp_html)
                     }
 
                 }
             });
         }
-
         function submit() {
-
             let comment = $('#comment').val()
             let star = $("input[name='rating']:checked").val()
 
@@ -135,27 +132,41 @@
                 url: "/review",
                 data: {comment_give: comment, star_give: star},
                 success: function (response) {
-                    alert(response['msg'])
-                    window.location.reload()
+                    if(response.result == 'fail') {
+                        alert(response['msg']);
+                        location.href = '/loginForm';
+                    } else {
+                        alert('리뷰를 등록하였습니다.');
+                        location.reload();
+                    }
                 }
             })
         }
     </script>
 </head>
 <body>
-<div class="page">
     <header>
-        <h2>뮤플리</h2>
-        <nav>
-            <ul class="page-header">
-                <li><a href="#">Main</a></li>
-                <li><a href="">My Page</a></li>
-                <li><a href="">Login</a></li>
+        <div class="logo">
+            <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
+        </div>
+        <nav class="nav-bar">
+            <ul class="nav__item">
+                {% set token = token %}
+                {% if token %}
+                    <a href="#">
+                        <li class="nav__list">마이페이지</li>
+                    </a>
+                    <a onclick="logout()">
+                        <li class="nav__list">로그아웃</li>
+                    </a>
+                {% else %}
+                    <a href="/loginForm">
+                        <li class="nav__list">로그인</li>
+                    </a>
+                {% endif %}
             </ul>
         </nav>
     </header>
-</div>
-<hr>
 <div class="main">
     <div class="music-info" id="music-info">
         <div class="somg-image">
