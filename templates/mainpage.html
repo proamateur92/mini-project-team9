@@ -14,8 +14,10 @@
 
     <script>
         $(document).ready(function (){
-            show_list().empty;
+            show_list();
         });
+
+
         function show_list() {
             $.ajax({
                 type: "GET",
@@ -32,11 +34,11 @@
                         let temp_html =
 
                             `<tr class="lists">
-                                                <th >${title}</th>
-                                                <td><img src="${cover}"></td>
-                                                <td>${singer}</td>
-                                                <td>${album}</td>
-                                                <td><button type="button" class="btn btn-outline-success">🛒</button></td>
+                                                <th id="song">${title}</th>
+                                                <td id="cover"><img src="${cover}"></td>
+                                                <td id="singer">${singer}</td>
+                                                <td id="album">${album}</td>
+                                                <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
                                                 <td><button type="button" class="btn btn-primary">리뷰 남기기</button></td>
                                             </tr>`
 
@@ -49,10 +51,15 @@
                 }
             })
         }
+
+
         // 로그인하기 창을 누르면 로그인,회원가입 창으로 이동하기위해 만든 함수
-        function hey(){
-            window.location.href="/mypage"
+        function to_login(){
+            window.location.href="/user/login"
         }
+
+
+
 
     </script>
 
@@ -144,6 +151,8 @@
     <script>
 
 
+
+
     </script>
 </head>
 
@@ -152,7 +161,7 @@
     <h1>뮤플리</h1>
 
     <div class="mybtns">
-        <button onclick="hey()" type="button" class="btn btn-dark">로그인 하기</button>
+        <button onclick="to_login()" type="button" class="btn btn-dark">로그인 하기</button>
 
     </div>
 
@@ -176,7 +185,7 @@
 </table>
 
 
-</div>
+
 </body>
 
 </html>

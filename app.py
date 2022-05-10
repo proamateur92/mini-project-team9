@@ -44,6 +44,9 @@ def home():
 def mypage():
    return render_template('mypage.html')
 
+@app.route('/detail')
+def review():
+    return render_template('detail.html')
 
 
 

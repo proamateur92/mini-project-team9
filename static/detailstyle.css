@@ -1,7 +1,4 @@
-* {
-    font-family: 'Gamja Flower', cursive;
-    font-family: 'Gowun Dodum', sans-serif;
-}
+
 
 li {
     list-style: none;
@@ -96,7 +93,7 @@ header ul > li {
 }
 
 .song-image {
-    background-image: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MTRfOTUg%2FMDAxNjQ5OTEzODcxMjgz.gF7moUoVG0olRMTUTP_JlaqvhX8JSJIRfVBUZTdLzTUg.ELRB7ijoJ6uFKFp-9MNhFaHSWhtKenBzLXiI8PHI1Kwg.JPEG.gagaka1202%2FScreenshot_20220414-142244.jpg&type=sc960_832');
+
     background-position: center 19%;
     background-size: cover;
 
@@ -105,7 +102,7 @@ header ul > li {
     width: 300px;
     height: 400px;
 
-    margin-right: 30px;
+    margin-right: 50px;
 }
 
 .song-info {
@@ -124,7 +121,7 @@ header ul > li {
 }
 li.list {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 100px 1fr ;
 }
 
 .txt {
