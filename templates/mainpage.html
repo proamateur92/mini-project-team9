@@ -14,7 +14,7 @@
 
     <script>
         $(document).ready(function (){
-            show_list();
+            show_list().empty;
         });
 
 
@@ -56,6 +56,10 @@
         // 로그인하기 창을 누르면 로그인,회원가입 창으로 이동하기위해 만든 함수
         function to_login(){
             window.location.href="/user/login"
+        }
+
+        function to_mypage(){
+            window.location.href="/index"
         }
 
 
@@ -162,6 +166,7 @@
 
     <div class="mybtns">
         <button onclick="to_login()" type="button" class="btn btn-dark">로그인 하기</button>
+        <button onclick="to_mypage()" type="button" class="btn btn-dark">마이페이지</button>
 
     </div>
 
