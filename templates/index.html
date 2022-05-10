@@ -14,6 +14,61 @@
     <title>로그인</title>
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href = "../static/detailstyle.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            show_review();
+        });
+        function show_review() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    let rows = response['reviews']
+                    for (let i=0; i < rows.length; i++) {
+                        let comment = rows[i]['comment']
+                        let star = rows[i]['star']
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let temp_html = `<li>
+                                                <span>
+                                                    닉네임
+                                                </span>
+
+                                                <span>
+                                                    ${comment}
+                                                </span>
+
+                                                <span>
+                                                    ${star_image}
+                                                </span>
+
+                                                <span>
+                                                    작성시간
+                                                </span>
+                                            </li>`
+                        $('#review-box').append(temp_html)
+                    }
+                }
+            })
+        }
+        function submit() {
+            let comment = $('#comment').val()
+            let star = $('#myform').val()
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: { comment_give: comment, star_give: star },
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <div class="page">
@@ -37,7 +92,7 @@
         </div>
         <div class="song-info">
             <h2 class="title">싸다9</h2>
-            <ul class="info-data">
+
                 <li class="list">
                     <span class="attr">
                         가수명
@@ -46,8 +101,8 @@
                         싸이
                     </span>
                 </li>
-            </ul>
-            <ul class="info-data">
+
+
                 <li class="list">
                     <span class="attr">
                         발매일자
@@ -56,8 +111,8 @@
                         싸이
                     </span>
                 </li>
-            </ul>
-            <ul class="info-data">
+
+
                 <li class="list">
                     <span class="attr">
                         가수명
@@ -66,7 +121,7 @@
                         싸이
                     </span>
                 </li>
-            </ul>
+
             <button class="add-btn" type="button">담기</button>
         </div>
 
@@ -75,8 +130,7 @@
     <hr>
     <div class="review">
         <h2 class="txt">리뷰 모음</h2>
-        <div class="review-moeum" id="review-list">
-            <ul class="review-data">
+        <div class="review-moeum" id="review-box">
                 <li class="review-doc">
                     <span class="review-text" id="review-id">
                         닉네임
@@ -94,7 +148,6 @@
                         작성시간
                     </span>
                 </li>
-            </ul>
         </div>
     </div>
     <hr>
@@ -103,8 +156,8 @@
         <h3>리뷰 작성</h3>
 
         <div class="input">
-            <input class="items">
-            <form name="myform" id="myform" method="post" action="./save" style="margin-left: 20px;">
+            <input class="text" id="comment">
+            <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">
                 <fieldset>
                     <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
                     <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
@@ -113,7 +166,7 @@
                     <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
                 </fieldset>
             </form>
-            <button class="submit-btn" type="button">등록</button>
+            <button onclick="submit()" class="submit-btn" type="button">등록</button>
         </div>
     </div>
 </div>
