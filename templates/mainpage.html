@@ -13,47 +13,20 @@
             crossorigin="anonymous"></script>
 
     <script>
-        $(document).ready(function (){
-            show_list().empty;
-        });
-        function show_list() {
+        function hey() {
             $.ajax({
-                type: "GET",
-                url: "/musiclist",
-                data: {},
-                success: function (response) {
-                    let rows = response['musics']
-                    for(let i = 0; i < rows.length; i++){
-                        let title = rows[i]['title']
-                        let singer = rows[i]['singer']
-                        let album = rows[i]['album']
-                        let cover = rows[i]['cover']
-
-                        let temp_html =
-
-                            `<tr class="lists">
-                                                <th >${title}</th>
-                                                <td><img src="${cover}"></td>
-                                                <td>${singer}</td>
-                                                <td>${album}</td>
-                                                <td><button type="button" class="btn btn-outline-success">🛒</button></td>
-                                                <td><button type="button" class="btn btn-primary">리뷰 남기기</button></td>
-                                            </tr>`
-
-                        $('#show_list').append(temp_html)
-
-
-
-
+                type: 'POST',
+                url: '/hey',
+                data: {'text':$('#no').val()},
+                success: response => {
+                    if(response.result) {
+                        alert(1);
+                    } else {
+                        alert(2);
                     }
                 }
             })
         }
-        // 로그인하기 창을 누르면 로그인,회원가입 창으로 이동하기위해 만든 함수
-        function hey(){
-            window.location.href="/mypage"
-        }
-
     </script>
 
     <title>뮤플리</title>
@@ -141,19 +114,17 @@
 
 
     </style>
-    <script>
-
-
-    </script>
 </head>
 
 <body>
 <div class="mytitle">
+    <input type="text" id="no" />
+    <button onclick="hey()">쿠키 정보 테스트</button>
+
     <h1>뮤플리</h1>
 
     <div class="mybtns">
-        <button onclick="hey()" type="button" class="btn btn-dark">로그인 하기</button>
-
+        <button type="button" class="btn btn-dark">로그인 하기</button>
     </div>
 
 
