@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>뮤플리 - 로그인페이지</title>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
+    <script src="../static/js/loginForm.js" defer></script>
+    <link rel="stylesheet" href="../static/style.css">
+    <script>
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="logo">
+                <a href="#"><i class="fa-brands fa-spotify fa-3x"></i></a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__item">
+                    <a href="#">
+                        <li class="nav__list">뮤직차트</li>
+                    </a>
+                </ul>
+            </nav>
+        </header>
+        <section class="login-container">
+            <h1 class="login-title">뮤플리</h1>
+            <input class="userid" type="text" id="userid" maxlength="14" onchange="blockJoin()" placeholder="아이디"/>
+            <input class="userpw" type="password" id="userpw" placeholder="비밀번호" />
+            <button class="id-checker hidden" onclick="idCheck()">중복체크</button>
+            <div class="button-container">
+                <button class="login" onclick="login()">로그인</button>
+                <button class="real-join hidden" onclick="join()">회원가입</button>
+                <button class="cancel hidden" onclick="cancel()">취소</button>
+                <button class="fake-join" onclick="buttonShow()">회원가입</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
