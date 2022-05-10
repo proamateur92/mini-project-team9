@@ -45,6 +45,7 @@ function buttonShow() {
     $('.cancel').toggleClass('hidden');
     $('.fake-join').toggleClass('hidden');
     $('.login').toggleClass('hidden');
+    $('.userpw2').toggleClass('hidden');
     $('#userid').val('');
     $('#userpw').val('');
 }
@@ -55,6 +56,7 @@ function cancel() {
     $('.cancel').toggleClass('hidden');
     $('.fake-join').toggleClass('hidden');
     $('.login').toggleClass('hidden');
+    $('.userpw2').toggleClass('hidden');
 }
 
 // 정규식을 사용한 아이디 값 체크
@@ -89,6 +91,11 @@ function join() {
     //     alert('비밀번호를 입력해주세요.');
     //     $('#userpw').focus();
     //     return;
+    //
+    // if($('#userpw2').val() === '') {
+    //     alert('비밀번호를 입력해주세요.');
+    //     $('#userpw2').focus();
+    //     return;
     // }
     //
     // if(!is_password($('#userpw').val())) {
@@ -100,6 +107,12 @@ function join() {
         alert('아이디 중복 체크해주세요');
         return;
     }
+
+    if(!($('#userpw').val() == $('#userpw2').val()))  {
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+    }
+
     $.ajax({
         type:'POST',
         url: 'user/register',

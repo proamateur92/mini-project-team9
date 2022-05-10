@@ -12,179 +12,78 @@
             crossorigin="anonymous"></script>
 
     <title>로그인</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href = "../static/detailstyle.css">
 
-    <style>
-        .header {
-            background-color: blue;
-            width: 1100px;
-            height: 70px;
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            show_review();
+        });
+        function show_review() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    let rows = response['reviews']
+                    for (let i=0; i < rows.length; i++) {
+                        let comment = rows[i]['comment']
+                        let star = rows[i]['star']
 
-            margin: 0 auto;
-            margin-top: 20px;
-        }
-        .main {
+                        let star_image = '⭐'.repeat(star)
 
+                        let temp_html = `<li>
+                                                <span>
+                                                    닉네임
+                                                </span>
 
-            width: 1100px;
-            height: 1500px;
+                                                <span>
+                                                    ${comment}
+                                                </span>
 
+                                                <span>
+                                                    ${star_image}
+                                                </span>
 
-            margin: 0 auto;
-            margin-bottom: 20px;
-
-            background-size: cover;
-            background-position: center;
-            padding-top: 40px;
+                                                <span>
+                                                    작성시간
+                                                </span>
+                                            </li>`
+                        $('#review-box').append(temp_html)
+                    }
+                }
+            })
         }
-        .footer {
-            width: 70%;
-            text-align: left;
-            margin: 0 auto;
-            margin-top: 20px;
-            border:  2px solid red;
-            border-radius: 10px;
+        function submit() {
+            let comment = $('#comment').val()
+            let star = $('#myform').val()
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: { comment_give: comment, star_give: star },
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
         }
-        .music-info {
-            border:  2px solid red;
-
-            border-radius: 10px;
-
-            width: 70%;
-            height: 520px;
-            margin: 0 auto;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: left;
-        }
-        .song-image {
-            background-image: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MTRfOTUg%2FMDAxNjQ5OTEzODcxMjgz.gF7moUoVG0olRMTUTP_JlaqvhX8JSJIRfVBUZTdLzTUg.ELRB7ijoJ6uFKFp-9MNhFaHSWhtKenBzLXiI8PHI1Kwg.JPEG.gagaka1202%2FScreenshot_20220414-142244.jpg&type=sc960_832');
-            background-position: center 19%;
-            background-size: cover;
-
-            color: deeppink;
-            border: solid;
-            width: 300px;
-            height: 400px;
-
-            margin: 10px;
-
-            text-align: center;
-            white-space:nowrap;
-        }
-        .song-info {
-
-            width: 400px;
-            height: 500px;
-            margin: 0 auto;
-            margin-left: 1px;
-            white-space:nowrap;
-
-        }
-        .review {
-            width: 70%;
-            text-align: left;
-            margin: 0 auto;
-            margin-top: 20px;
-            border:  2px solid red;
-            border-radius: 10px;
-        }
-        .txt {
-            margin-top: 10px;
-            margin-left: 20px;
-            padding: 10px;
-        }
-        .review-moeum {
-            margin-left: 20px;
-        }
-        .input-group mb-3 {
-            background-color: pink;
-            width: 92%;
-
-            margin: 0 auto;
-            margin-top: 20px;
-        }
-        .input {
-            width: 92%;
-            margin: 0 auto;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-        .items {
-            width: 80%;
-        }
-        .title{
-            margin-top: 150px;
-            margin-left: 20px;
-            width: 30px;
-            align: center;
-        }
-        .info-data {
-            list-style: none;
-            margin-top: 20px;
-            margin-left: 38px;
-            width: 30px;
-
-        }
-
-        .btn {
-            margin-left: 20px;
-        }
-
-        li.list {
-            display: flex;
-            align-items: center;
-        }
-
-        span.attr {
-            margin-right: 20px;
-        }
-        .value{
-            display: grid;
-            margin-left: 20px;
-
-        }
-        #myform fieldset {
-            display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-            border: 0; /* 필드셋 테두리 제거 */
-        }
-        #myform input[type=radio] {
-            display: none; /* 라디오박스 감춤 */
-        }
-        #myform label {
-            font-size: 1em; /* 이모지 크기 */
-            color: transparent; /* 기존 이모지 컬러 제거 */
-            text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
-        }
-        #myform label:hover {
-            text-shadow: 0 0 0 #fff326; /* 마우스 호버 */
-        }
-        #myform label:hover ~ label {
-            text-shadow: 0 0 0 #fff326; /* 마우스 호버 뒤에오는 이모지들 */
-        }
-        #myform fieldset {
-            display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-            direction: rtl; /* 이모지 순서 반전 */
-            border: 0; /* 필드셋 테두리 제거 */
-        }
-        #myform fieldset legend {
-            text-align: left;
-        }
-        #myform input[type=radio]:checked ~ label {
-            text-shadow: 0 0 0 #fff326; /* 마우스 클릭 체크 */
-        }
-
-    </style>
+    </script>
 </head>
 <body>
-<div class="header">
-
-</div>
+<div class="page">
+            <header>
+                <h2>뮤플리</h2>
+                <nav>
+                    <ul class="page-header">
+                        <li><a href="#">Main</a></li>
+                        <li><a href="">My Page</a></li>
+                        <li><a href="">Login</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+<hr>
 <div class="main">
     <div class="music-info">
         <div class="song-image">
@@ -193,69 +92,85 @@
         </div>
         <div class="song-info">
             <h2 class="title">싸다9</h2>
-            <ul class="info-data">
-                <li class="list">
-                    <span class="attr">
-                        가수명
-                    </span>
-                    <span class="value">
-                        싸이
-                    </span>
-                </li>
-            </ul>
-            <ul class="info-data">
-                <li class="list">
-                    <span class="attr">
-                        가수명
-                    </span>
-                    <span class="value">
-                        싸이
-                    </span>
-                </li>
-            </ul>
-            <ul class="info-data">
-                <li class="list">
-                    <span class="attr">
-                        가수명
-                    </span>
-                    <span class="value">
-                        싸이
-                    </span>
-                </li>
-            </ul>
 
-            <button type="button" class="btn btn-outline-warning">담기</button>
+                <li class="list">
+                    <span class="attr">
+                        가수명
+                    </span>
+                    <span class="attr">
+                        싸이
+                    </span>
+                </li>
+
+
+                <li class="list">
+                    <span class="attr">
+                        발매일자
+                    </span>
+                    <span class="attr">
+                        싸이
+                    </span>
+                </li>
+
+
+                <li class="list">
+                    <span class="attr">
+                        가수명
+                    </span>
+                    <span class="attr">
+                        싸이
+                    </span>
+                </li>
+
+            <button class="add-btn" type="button">담기</button>
         </div>
+
     </div>
 
+    <hr>
     <div class="review">
         <h2 class="txt">리뷰 모음</h2>
-        <div class="review-moeum" id="review-list" style="margin-bottom: 20px;">
-            <p>asd</p>
-            <p>asdf</p>
+        <div class="review-moeum" id="review-box">
+                <li class="review-doc">
+                    <span class="review-text" id="review-id">
+                        닉네임
+                    </span>
 
+                    <span class="review-text" id="review-comment">
+                        코멘트
+                    </span>
+
+                    <span class="review-text" id="review-star">
+                        별점
+                    </span>
+
+                    <span class="review-text" id="review-time">
+                        작성시간
+                    </span>
+                </li>
         </div>
     </div>
+    <hr>
     <div class="footer">
-    <div style="margin-left: 25px; margin-top: 30px;">
-        <h2>리뷰 남기기</h2>
-    </div>
-    <div class="input">
-        <input class="items" style="width: 60%; border-radius: 5px; border: 1px solid gray; ">
-        <form name="myform" id="myform" method="post" action="./save" style="margin-left: 20px;">
-            <fieldset>
-                <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-                <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-                <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-                <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-                <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-            </fieldset>
-        </form>
-        <button type="button" class="btn btn-warning">등록</button>
-    </div>
+
+        <h3>리뷰 작성</h3>
+
+        <div class="input">
+            <input class="text" id="comment">
+            <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">
+                <fieldset>
+                    <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+                    <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+                    <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+                    <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+                    <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+                </fieldset>
+            </form>
+            <button onclick="submit()" class="submit-btn" type="button">등록</button>
+        </div>
     </div>
 </div>
-
+<hr>
 
 </body>
 </html>

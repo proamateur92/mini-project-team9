@@ -14,9 +14,9 @@
 
     <script>
         $(document).ready(function (){
-            show_order();
+            show_list().empty;
         });
-        function show_order() {
+        function show_list() {
             $.ajax({
                 type: "GET",
                 url: "/musiclist",
@@ -26,16 +26,21 @@
                     for(let i = 0; i < rows.length; i++){
                         let title = rows[i]['title']
                         let singer = rows[i]['singer']
-                        let albumtitle = rows[i]['albumtitle']
+                        let album = rows[i]['album']
+                        let cover = rows[i]['cover']
 
-                        let temp_html = `<tr>
+                        let temp_html =
+
+                            `<tr class="lists">
                                                 <th >${title}</th>
-                                                <td>앨범자켓들어갈자리</td>
+                                                <td><img src="${cover}"></td>
                                                 <td>${singer}</td>
-                                                <td>${albumtitle}</td>
+                                                <td>${album}</td>
+                                                <td><button type="button" class="btn btn-outline-success">🛒</button></td>
+                                                <td><button type="button" class="btn btn-primary">리뷰 남기기</button></td>
                                             </tr>`
 
-                        $('#show_order').append(temp_html)
+                        $('#show_list').append(temp_html)
 
 
 
@@ -44,7 +49,10 @@
                 }
             })
         }
-
+        // 로그인하기 창을 누르면 로그인,회원가입 창으로 이동하기위해 만든 함수
+        function hey(){
+            window.location.href="/mypage"
+        }
 
     </script>
 
@@ -122,6 +130,16 @@
         .mybtns > button {
             margin-right: 10px;
         }
+
+        .lists {
+            height: 100px;
+        }
+
+
+
+
+
+
     </style>
     <script>
 
@@ -147,9 +165,10 @@
         <th scope="col">커버</th>
         <th scope="col">아티스트</th>
         <th scope="col">앨범</th>
+        <th scope="col">담기</th>
     </tr>
     </thead>
-    <tbody id="show_order">
+    <tbody id="show_list">
 
 
 
