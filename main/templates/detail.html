@@ -18,7 +18,7 @@
     <script>
         $(document).ready(function () {
             add();
-            // show_music();
+            show_music();
         });
         function add() {
             $.ajax({
@@ -127,38 +127,38 @@
             })
         }
 
-        // function show_music(){
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "/detail",
-        //         data: {},
-        //         success: function (response) {
-        //             let rows = response['musics']
-        //                 console.log('musics')
-        //                 for (let i = 0; i < rows.length; i++) {
-        //
-        //                     let done = rows[i]['done']
-        //
-        //                     let temp_html = ``
-        //
-        //                     if (done == 0) {
-        //                         temp_html = `<li>
-        //                                      <button onclick="get()" class="submit-btn" type="button">등록</button>
-        //                                     </li>`
-        //                     } else {
-        //                         temp_html = `<li>
-        //                                      <button onclick="remove()" class="submit-btn" type="button">취소</button>
-        //                                     </li>`
-        //                     }
-        //
-        //                     $('#song-info').append(temp_html)
-        //                     }
-        //
-        //             }
-        //
-        //     })
-        //
-        // }
+        function show_music(){
+            $.ajax({
+                type: "GET",
+                url: "/detail",
+                data: {},
+                success: function (response) {
+                    let rows = response['musics']
+                        console.log('musics')
+                        for (let i = 0; i < rows.length; i++) {
+
+                            let done = rows[i]['done']
+
+                            let temp_html = ``
+
+                            if (done == 0) {
+                                temp_html = `<li>
+                                             <button onclick="get()" class="submit-btn" type="button">등록</button>
+                                            </li>`
+                            } else {
+                                temp_html = `<li>
+                                             <button onclick="remove()" class="submit-btn" type="button">취소</button>
+                                            </li>`
+                            }
+
+                            $('#song-info').append(temp_html)
+                            }
+
+                    }
+
+            })
+
+        }
 
     </script>
 </head>
@@ -212,7 +212,7 @@
             </li>
 
             <li>
-
+                <button onclick="get()" class="submit-btn" type="button">등록</button>
             </li>
 
         </div>
