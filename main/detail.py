@@ -24,16 +24,19 @@ def test_post():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        review_code = db.chart.find_one('rank')
         user_info = db.user.find_one({"id": payload['id']})
         comment_receive = request.form['comment_give']
         star_receive = request.form['star_give']
         doc = {
+            'code': review_code,
             'id': user_info['id'],
             'comment': comment_receive,
-            'star': star_receive
+            'star': star_receive,
+
         }
         db.review.insert_one(doc)
-        return render_template('detail.html', id=user_info["id"])
+        return render_template('detail.html', id=user_info["id"], code=review_code)
     except jwt.exceptions.DecodeError:
         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 
@@ -41,6 +44,8 @@ def test_post():
 
 @blueprint.route('/review', methods=['GET'])
 def test_get():
+
+
     review_total = list(db.review.find({}, {'_id': False}))
     return jsonify({'reviews':review_total})
 
