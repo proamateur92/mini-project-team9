@@ -22,74 +22,9 @@
 
         $(document).ready(function () {
             add();
-            image()
-            listing();
         });
 
-        function image() {
-            $.ajax({
-                type: "GET",
-                url: "/music",
-                data: {},
-                success: function (response) {
-                    let rows = response['musics']
-                    for (let i = 0; i < rows.length; i++) {
-                        let cover = rows[i]['cover']
 
-
-                        let temp_html = `
-                                            <div class="somg-image">
-                                                <img src="${cover}"
-                                                     style="margin-right: 30px;">
-                                            </div>
-
-
-                                 `
-                        $('#music-info').append(temp_html)
-                    }
-                }
-            })
-        }
-
-        function listing() {
-            $.ajax({
-                type: "GET",
-                url: "/music",
-                data: {},
-                success: function (response) {
-                    let rows = response['musics']
-                    for (let i = 0; i < rows.length; i++) {
-                        let title = rows[i]['title']
-                        let singer = rows[i]['singer']
-                        let album = rows[i]['album']
-
-                        let temp_html = `
-                                               <h2 class="title">${title}</h2>
-
-                                        <li class="list">
-                                            <span class="attr">
-                                                가수명
-                                            </span>
-                                            <span class="attr">
-                                                ${singer}
-                                            </span>
-                                        </li>
-                                        <li class="list">
-                                            <span class="attr">
-                                                앨범
-                                            </span>
-                                            <span class="attr">
-                                                ${album}
-                                            </span>
-                                        </li>
-
-                                 `
-
-                        $('#song-info').append(temp_html)
-                    }
-                }
-            })
-        }
 
         function add() {
             $.ajax({
