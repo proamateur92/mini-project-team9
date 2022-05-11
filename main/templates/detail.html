@@ -18,7 +18,6 @@
     <script>
         $(document).ready(function () {
             add();
-            show_music();
         });
         function add() {
             $.ajax({
@@ -32,7 +31,6 @@
                         let comment = rows[i]['comment']
                         let star = rows[i]['star']
                         let id = rows[i]['id']
-
 
                         let star_image = '⭐'.repeat(star)
 
@@ -104,6 +102,18 @@
             })
         }
 
+        function remove(rank) {
+            alert(rank)
+            $.ajax({
+                type: "POST",
+                url: "/remove",
+                data: {},
+                success: function (response) {
+                    alert('담기 취소하였습니다.')
+                }
+            })
+        }
+
         function remove() {
             let cover = "{{cover}}"
             let singer = "{{singer}}"
@@ -126,40 +136,6 @@
                 }
             })
         }
-
-        function show_music(){
-            $.ajax({
-                type: "GET",
-                url: "/detail",
-                data: {},
-                success: function (response) {
-                    let rows = response['musics']
-                        console.log('musics')
-                        for (let i = 0; i < rows.length; i++) {
-
-                            let done = rows[i]['done']
-
-                            let temp_html = ``
-
-                            if (done == 0) {
-                                temp_html = `<li>
-                                             <button onclick="get()" class="submit-btn" type="button">등록</button>
-                                            </li>`
-                            } else {
-                                temp_html = `<li>
-                                             <button onclick="remove()" class="submit-btn" type="button">취소</button>
-                                            </li>`
-                            }
-
-                            $('#song-info').append(temp_html)
-                            }
-
-                    }
-
-            })
-
-        }
-
     </script>
 </head>
 <body>
@@ -188,12 +164,12 @@
 </header>
 <div class="main">
     <div class="music-info" id="music-info">
+        <h1 style="font-size: 50px;">{{ singer }}</h1>
         <div class="song-image">
             <img src="{{ cover }}"
                  style="margin-right: 30px;">
         </div>
         <div class="song-info" id="song-info">
-            <h2 class="title">{{ title }}</h2>
             <li class="list">
                     <span class="attr">
                         가수명
@@ -210,10 +186,19 @@
                         {{ album }}
                     </span>
             </li>
-
+            <li>
+            <h1>{{ done }}</h1>
+                {% if done == 0 %}
+                    <button onclick="remove({{ rank }})">등록 취소</button>
+                {% else %}
+                    <button onclick="get()">등록</button>
+                {% endif %}
+            </li>
+            <!--
             <li>
                 <button onclick="get()" class="submit-btn" type="button">등록</button>
             </li>
+            -->
 
         </div>
 

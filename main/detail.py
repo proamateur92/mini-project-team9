@@ -11,12 +11,21 @@ import jwt
 @blueprint.route('/detail')
 def detail():
     rank = request.args.get('rank')
-    title = request.args.get('title').split('(')
+    title = request.args.get('title')
+    if title is not None:
+        title = title.split('(')
     singer = request.args.get('singer')
     album = request.args.get('album')
     cover = request.args.get('cover')
     token_receive = request.cookies.get('mytoken')
-    return render_template('detail.html', token=token_receive, rank=rank, title=title[0], singer=singer, album=album, cover=cover)
+
+    # 담기 버튼일때 done = 1
+    done = request.cookies.get('done')
+    if done is None:
+        done = 1
+    else:
+        done = 0
+    return render_template('detail.html', token=token_receive, rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
 
 @blueprint.route('/review', methods=['POST'])
 def test_post():
@@ -55,7 +64,6 @@ def get():
         album_receive = request.form['album_give']
         singer_receive = request.form['singer_give']
 
-        db.mymusic.update_one({'index':['index']}, {'$set': {'done': 1}})
 
         # 아이디 별로 index + 1
         mymusic_index = list(db.mymusic.find({'id':id}))
@@ -71,37 +79,27 @@ def get():
             'done': 0
         }
         db.mymusic.insert_one(doc)
+        done = 0
 
-
-        return render_template('detail.html', id=id)
+        return jsonify({'result':'success'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 
+# db.mymusic.update_one({'done':[0]}, {'$set': {'done': 1}})
 
-@blueprint.route('/detail', methods=['POST'])
+@blueprint.route('/remove', methods=['POST'])
 def remove():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
         id = db.user.find_one({"id": payload['id']})['id']
-        cover_receive = request.form['cover_give']
-        title_receive = request.form['title_give']
-        album_receive = request.form['album_give']
-        singer_receive = request.form['singer_give']
-        index_receive = list(db.mymusic.find({'index'}))
-
-        db.mymusic.update_one({'index': index_receive}, {'$set': {'done': 0}})
-        db.mymusic.delete_one({'cover_give': cover_receive})
-        db.mymusic.delete_one({'title_give': title_receive})
-        db.mymusic.delete_one({'album_give': album_receive})
-        db.mymusic.delete_one({'singer_give': singer_receive})
+        # db.mymusic.delete({'id': singer_receive})
         # 아이디 별로 index + 1
-
 
         return render_template('detail.html', id=id)
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 페이지로 이동합니다.'})
+
 
 @blueprint.route('/review', methods=['GET'])
 def music_get():
