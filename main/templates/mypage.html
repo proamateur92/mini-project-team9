@@ -103,13 +103,26 @@
 
                         // let star_image='⭐'.repeat(star)
                         // 뽑아낸 정보들을 밑의 형식으로 붙일거에요
-                        let temp_html=`<tr onclick="to_song">
-                                                <td>${rank}</td>
-                                                <td><img src="${cover}" class="card-img-top" alt="..."></td>
-                                                <td>${title}</td>
-                                                <td>${singer}</td>
-                                                <td>${album}</td>
-                                        </tr>`
+                        {#let temp_html=`<tr onclick="to_song">#}
+                        {#                        <td>${rank}</td>#}
+                        {#                        <td><img src="${cover}" class="card-img-top" alt="..."></td>#}
+                        {#                        <td>${title}</td>#}
+                        {#                        <td>${singer}</td>#}
+                        {#                        <td>${album}</td>#}
+                        {#                </tr>`#}
+
+                        let temp_html=`<div class="container">
+                                            <div class="box">
+                                                <div class="imgBox">
+                                                    <img src="${cover}" alt="">
+                                                </div>
+                                                <div class="content">
+                                                    <h2>${title}</br>
+                                                    <span>${singer}/${album}</span></h2>
+                                                </div>
+                                            </div>
+                                       </div>`
+
                         $('#song-list').append(temp_html);
                     }
                 }
@@ -162,6 +175,7 @@
                 </tr>
                 </thead>
                 <tbody id="song-list">
+
                 </tbody>
             </table>
             <p></p>
