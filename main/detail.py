@@ -51,16 +51,17 @@ def insert():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
+        id = db.user.find_one({"id": payload['id']})['id']
         cover_receive = request.form['cover_give']
         album_receive = request.form['album_give']
         singer_receive = request.form['singer_give']
 
-        mymusic_index = list(db.mymusic.find({},{'_id':False}))
+        # 아이디 별로 index + 1
+        mymusic_index = list(db.mymusic.find({'id':id}))
         count = len(mymusic_index) + 1
 
         doc = {
-            'id': user_info['id'],
+            'id': id,
             'index': count,
             'cover': cover_receive,
             'album': album_receive,
@@ -68,6 +69,6 @@ def insert():
         }
         db.mymusic.insert_one(doc)
 
-        return render_template('detail.html', id=user_info["id"])
+        return render_template('detail.html', id=id)
     except jwt.exceptions.DecodeError:
         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
