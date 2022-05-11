@@ -18,6 +18,7 @@
     <script>
         $(document).ready(function () {
             add();
+            // show_music();
         });
         function add() {
             $.ajax({
@@ -85,11 +86,12 @@
             let cover = "{{cover}}"
             let singer = "{{singer}}"
             let album = "{{album}}"
+            let title = "{{title}}"
 
             $.ajax({
                 type: "POST",
                 url: "/detail",
-                data: {cover_give: cover, singer_give: singer, album_give: album},
+                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album,},
                 success: function (response) {
                      if (response.result == 'fail') {
                         alert(response['msg']);
@@ -102,6 +104,61 @@
             })
         }
 
+        function remove() {
+            let cover = "{{cover}}"
+            let singer = "{{singer}}"
+            let album = "{{album}}"
+            let title = "{{title}}"
+
+
+            $.ajax({
+                type: "POST",
+                url: "/detail",
+                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
+                success: function (response) {
+                     if (response.result == 'fail') {
+                        alert(response['msg']);
+                        location.href = '/loginForm';
+                    } else {
+                        alert('취소에 성공하셨습니다.');
+                        location.reload();
+                    }
+                }
+            })
+        }
+
+        // function show_music(){
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/detail",
+        //         data: {},
+        //         success: function (response) {
+        //             let rows = response['musics']
+        //                 console.log('musics')
+        //                 for (let i = 0; i < rows.length; i++) {
+        //
+        //                     let done = rows[i]['done']
+        //
+        //                     let temp_html = ``
+        //
+        //                     if (done == 0) {
+        //                         temp_html = `<li>
+        //                                      <button onclick="get()" class="submit-btn" type="button">등록</button>
+        //                                     </li>`
+        //                     } else {
+        //                         temp_html = `<li>
+        //                                      <button onclick="remove()" class="submit-btn" type="button">취소</button>
+        //                                     </li>`
+        //                     }
+        //
+        //                     $('#song-info').append(temp_html)
+        //                     }
+        //
+        //             }
+        //
+        //     })
+        //
+        // }
 
     </script>
 </head>
@@ -145,7 +202,7 @@
                         {{ singer }}
                     </span>
             </li>
-            <li class="list">
+            <li class="list" >
                     <span class="attr">
                          앨범
                     </span>
@@ -154,8 +211,10 @@
                     </span>
             </li>
 
+            <li>
 
-            <button onclick="get()" class="submit-btn" type="button">등록</button>
+            </li>
+
         </div>
 
     </div>
@@ -172,9 +231,6 @@
                     </span>
                 <span class="review-text" id="review-star">
                         별점
-                    </span>
-                <span class="review-text" id="review-time">
-                        작성시간
                     </span>
             </li>
         </div>
