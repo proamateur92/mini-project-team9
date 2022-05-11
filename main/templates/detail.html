@@ -24,8 +24,6 @@
             add();
         });
 
-
-
         function add() {
             $.ajax({
                 type: "GET",
@@ -104,19 +102,19 @@
     </header>
 <div class="main">
     <div class="music-info" id="music-info">
-        <div class="somg-image">
-            <img src="${cover}"
+        <div class="song-image">
+            <img src="{{ cover }}"
                  style="margin-right: 30px;">
         </div>
         <div class="song-info" id="song-info">
-            <h2 class="title">${title}</h2>
+            <h2 class="title">{{ title }}</h2>
 
             <li class="list">
                     <span class="attr">
                         가수명
                     </span>
                 <span class="attr">
-                        ${singer}
+                        {{ singer }}
                     </span>
             </li>
 
@@ -126,7 +124,7 @@
                          앨범
                     </span>
                 <span class="attr">
-                        ${album}
+                        {{ album }}
                     </span>
             </li>
 
