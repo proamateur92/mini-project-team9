@@ -32,11 +32,12 @@ for music in musics:
 # 코딩 시작
 
 
-@blueprint.route('/reviewform')
-def home():
-    return render_template('detail.html')
+@blueprint.route('/detail')
+def detail():
+    token_receive = request.cookies.get('mytoken')
+    return render_template('detail.html', token=token_receive)
 
-@blueprint.route('/detail', methods=['GET'])
+@blueprint.route('/music', methods=['GET'])
 def music_get():
     music_total = list(db.musics.find({}, {'_id': False}))
 
@@ -56,7 +57,7 @@ def test_post():
             'star': star_receive
         }
         db.review.insert_one(doc)
-        return render_template('detailTest.html', id=user_info["id"])
+        return render_template('detail.html', id=user_info["id"])
     except jwt.exceptions.DecodeError:
         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 

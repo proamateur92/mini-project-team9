@@ -22,12 +22,6 @@ blueprint = Blueprint("user", __name__, url_prefix="/")
 #     except jwt.exceptions.DecodeError:
 #         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 
-# 상세 페이지 예제 코드
-@blueprint.route('/detail')
-def detail():
-    token_receive = request.cookies.get('mytoken')
-    return render_template('detailTest.html', token=token_receive)
-
 # 토큰 값 가져오기 예제 코드
 @blueprint.route('/hey', methods=['POST'])
 def hey():

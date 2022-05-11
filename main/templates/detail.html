@@ -29,7 +29,7 @@
         function image() {
             $.ajax({
                 type: "GET",
-                url: "/detail",
+                url: "/music",
                 data: {},
                 success: function (response) {
                     let rows = response['musics']
@@ -54,7 +54,7 @@
         function listing() {
             $.ajax({
                 type: "GET",
-                url: "/detail",
+                url: "/music",
                 data: {},
                 success: function (response) {
                     let rows = response['musics']
