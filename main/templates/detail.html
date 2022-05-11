@@ -32,11 +32,17 @@
                 success: function (response) {
                     let rows = response['reviews']
                     for (let i = 0; i < rows.length; i++) {
+                        let rank = rows[i]['rank']
                         let comment = rows[i]['comment']
                         let star = rows[i]['star']
                         let id = rows[i]['id']
 
-                        let temp_html = `<li class="review-doc">
+                        let star_image = '⭐'.repeat(star)
+
+                        let temp_html = ``
+
+                        if ("{{rank}}" == rank) {
+                            temp_html = `<li class="review-doc">
                                             <span class="review-text" id="review-id">
                                                 ${id}
                                             </span>
@@ -44,28 +50,30 @@
                                                 ${comment}
                                             </span>
                                             <span class="review-text" id="review-star">
-                                                ${star}
+                                                ${star_image}
                                             </span>
-                                            <span class="review-text" id="review-time">
-                                                작성시간
-                                            </span>
+
                                         </li>`
+                        } else {
+                            temp_html = ``
+                        }
                         $('#review-box').append(temp_html)
                     }
-
                 }
             });
         }
+
         function submit() {
             let comment = $('#comment').val()
             let star = $("input[name='rating']:checked").val()
+            let rank = "{{rank}}"
 
             $.ajax({
                 type: "POST",
                 url: "/review",
-                data: {comment_give: comment, star_give: star},
+                data: {comment_give: comment, star_give: star, rank_give: rank},
                 success: function (response) {
-                    if(response.result == 'fail') {
+                    if (response.result == 'fail') {
                         alert(response['msg']);
                         location.href = '/loginForm';
                     } else {
@@ -75,31 +83,54 @@
                 }
             })
         }
+
+        function get() {
+            let cover = "{{cover}}"
+            let singer = "{{singer}}"
+            let album = "{{album}}"
+
+            $.ajax({
+                type: "POST",
+                url: "/detail",
+                data: {cover_give: cover, singer_give: singer, album_give: album},
+                success: function (response) {
+                     if (response.result == 'fail') {
+                        alert(response['msg']);
+                        location.href = '/loginForm';
+                    } else {
+                        alert('담기에 성공하셨습니다.');
+                        location.reload();
+                    }
+                }
+            })
+        }
+
+
     </script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
-        </div>
-        <nav class="nav-bar">
-            <ul class="nav__item">
-                {% set token = token %}
-                {% if token %}
-                    <a href="#">
-                        <li class="nav__list">마이페이지</li>
-                    </a>
-                    <a onclick="logout()">
-                        <li class="nav__list">로그아웃</li>
-                    </a>
-                {% else %}
-                    <a href="/loginForm">
-                        <li class="nav__list">로그인</li>
-                    </a>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+<header>
+    <div class="logo">
+        <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
+    </div>
+    <nav class="nav-bar">
+        <ul class="nav__item">
+            {% set token = token %}
+            {% if token %}
+            <a href="#">
+                <li class="nav__list">마이페이지</li>
+            </a>
+            <a onclick="logout()">
+                <li class="nav__list">로그아웃</li>
+            </a>
+            {% else %}
+            <a href="/loginForm">
+                <li class="nav__list">로그인</li>
+            </a>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
 <div class="main">
     <div class="music-info" id="music-info">
         <div class="song-image">
@@ -128,7 +159,7 @@
                     </span>
             </li>
 
-            <button class="add-btn" type="button">담기</button>
+            <button onclick="get()" class="submit-btn" type="button">등록</button>
         </div>
 
     </div>
@@ -158,7 +189,7 @@
         </div>
     </div>
     <hr>
-    <div class="footer">
+    <div class="footer" id="footer">
 
         <h3>리뷰 작성</h3>
 

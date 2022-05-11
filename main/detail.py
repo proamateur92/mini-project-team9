@@ -25,9 +25,11 @@ def test_post():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
+        rank_receive = request.form['rank_give']
         comment_receive = request.form['comment_give']
         star_receive = request.form['star_give']
         doc = {
+            'rank': rank_receive,
             'id': user_info['id'],
             'comment': comment_receive,
             'star': star_receive
@@ -44,3 +46,28 @@ def test_get():
     review_total = list(db.review.find({}, {'_id': False}))
     return jsonify({'reviews':review_total})
 
+@blueprint.route('/detail', methods=['POST'])
+def insert():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        cover_receive = request.form['cover_give']
+        album_receive = request.form['album_give']
+        singer_receive = request.form['singer_give']
+
+        mymusic_index = list(db.mymusic.find({},{'_id':False}))
+        count = len(mymusic_index) + 1
+
+        doc = {
+            'id': user_info['id'],
+            'index': count,
+            'cover': cover_receive,
+            'album': album_receive,
+            'singer': singer_receive
+        }
+        db.mymusic.insert_one(doc)
+
+        return render_template('detail.html', id=user_info["id"])
+    except jwt.exceptions.DecodeError:
+        return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
