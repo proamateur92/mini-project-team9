@@ -44,6 +44,13 @@ def test_post():
 
 @blueprint.route('/review', methods=['GET'])
 def test_get():
+<<<<<<< HEAD
+=======
+
+
+    review_total = list(db.review.find({}, {'_id': False}))
+    return jsonify({'reviews':review_total})
+>>>>>>> 3023b0d15cdadb03a507ef9316ea6e23be66159c
 
 
     review_total = list(db.review.find({}, {'_id': False}))
