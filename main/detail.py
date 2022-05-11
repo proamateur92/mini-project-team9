@@ -55,7 +55,7 @@ def get():
         album_receive = request.form['album_give']
         singer_receive = request.form['singer_give']
 
-        db.mymusic.update_one({'index':['index']}, {'$set': {'done': 1}})
+        # db.mymusic.update_one({'done':[0]}, {'$set': {'done': 1}})
 
         # 아이디 별로 index + 1
         mymusic_index = list(db.mymusic.find({'id':id}))
@@ -73,7 +73,7 @@ def get():
         db.mymusic.insert_one(doc)
 
 
-        return render_template('detail.html', id=id)
+        return render_template('detail.html', id=id, done=0)
     except jwt.exceptions.DecodeError:
         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
 
