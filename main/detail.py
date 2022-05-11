@@ -1,31 +1,23 @@
 from main import *
 from flask import Blueprint
 
-
 blueprint = Blueprint("detail", __name__, url_prefix="")
-
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-
-
-
-
 
 # 토큰 디코드
 SECRET_KEY = 'likeMusic'
-
 import jwt
 
-
-
 # 코딩 시작
-
-
 @blueprint.route('/detail')
 def detail():
+    rank = request.args.get('rank')
+    title = request.args.get('title').split('(')
+    singer = request.args.get('singer')
+    album = request.args.get('album')
+    cover = request.args.get('cover')
     token_receive = request.cookies.get('mytoken')
-    return render_template('detail.html', token=token_receive)
-
-
+    return render_template('detail.html', token=token_receive, rank=rank, title=title[0], singer=singer, album=album, cover=cover)
 
 @blueprint.route('/review', methods=['POST'])
 def test_post():
