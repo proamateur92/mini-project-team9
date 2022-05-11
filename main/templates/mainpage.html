@@ -12,9 +12,9 @@
     <script src="../static/js/logout.js"></script>
     <script>
         $(document).ready(function () {
-            show_list().empty;
+            $('#show_list').empty();
+            show_list();
         });
-
 
         function show_list() {
             $.ajax({
@@ -22,22 +22,25 @@
                 url: "/musiclist",
                 data: {},
                 success: function (response) {
-                    let rows = response['musics']
+                    let rows = response['chart']
                     for (let i = 0; i < rows.length; i++) {
+                        let rank = rows[i]['rank']
                         let title = rows[i]['title']
                         let singer = rows[i]['singer']
                         let album = rows[i]['album']
                         let cover = rows[i]['cover']
-
                         let temp_html =
-                            `<tr class="lists">
-                                                <th id="song">${title}</th>
-                                                <td id="cover"><img src="${cover}"></td>
-                                                <td id="singer">${singer}</td>
-                                                <td id="album">${album}</td>
-                                                <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
-                                                <td><button type="button" class="btn btn-primary">리뷰 남기기</button></td>
-                                            </tr>`
+                            `<div>
+                                    <a href='/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}'>
+                                    <tr class="lists">
+                                    <th id="rank">${rank}</th>
+                                    <th id="title">${title}</th>
+                                    <td id="cover"><img src="${cover}"></td>
+                                    <td id="singer">${singer}</td>
+                                    <td id="album">${album}</td>
+                                    <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
+                                    <td><button type="button" class="btn btn-primary">리뷰 남기기</button></td>
+                             </tr></a></div>`
 
                         $('#show_list').append(temp_html)
 
@@ -70,7 +73,7 @@
         }
     </script>
 
-    <title>뮤플리</title>
+    <title>뮤플리 - 메인페이지</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
@@ -152,46 +155,43 @@
 
     </style>
 </head>
-
-<body>
-<header>
-    <div class="logo">
-        <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
-    </div>
-    <nav class="nav-bar">
-        <ul class="nav__item">
-            {% set token = token %}
-            {% if token %}
-                <a href="#">
-                    <li class="nav__list">마이페이지</li>
-                </a>
-                <a>
-                    <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
-                </a>
-            {% else %}
-                <a href="/loginForm">
-                    <li class="nav__list">로그인</li>
-                </a>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
-<div class="mytitle">
-</div>
-<table class="table">
-    <thead>
-    <tr class="categori">
-        <th scope="col">목록</th>
-        <th scope="col">커버</th>
-        <th scope="col">아티스트</th>
-        <th scope="col">앨범</th>
-        <th scope="col">담기</th>
-    </tr>
-    </thead>
-    <tbody id="show_list">
-    </tbody>
-</table>
-
-</body>
-
+    <body>
+        <header>
+            <div class="logo">
+                <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__item">
+                    {% set token = token %}
+                    {% if token %}
+                        <a href="#">
+                            <li class="nav__list">마이페이지</li>
+                        </a>
+                        <a>
+                            <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
+                        </a>
+                    {% else %}
+                        <a href="/loginForm">
+                            <li class="nav__list">로그인</li>
+                        </a>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <div class="mytitle">
+        </div>
+        <table class="table">
+            <thead>
+            <tr class="category">
+                <th scope="col">목록</th>
+                <th scope="col">커버</th>
+                <th scope="col">아티스트</th>
+                <th scope="col">앨범</th>
+                <th scope="col">담기</th>
+            </tr>
+            </thead>
+            <tbody id="show_list">
+            </tbody>
+        </table>
+    </body>
 </html>
