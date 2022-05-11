@@ -66,10 +66,6 @@ def test_post():
 
 
 
-if __name__ == '__main__':
-   app.run('0.0.0.0',port=5000,debug=True)
-
-
 
 #body-content > div.newest-list > div > table > tbody > tr:nth-child(1) > td:nth-child(3) > a > span
 #body-content > div.newest-list > div > table > tbody > tr:nth-child(2) > td:nth-child(3) > a > span
