@@ -17,7 +17,6 @@ def detail():
     singer = request.args.get('singer')
     album = request.args.get('album')
     cover = request.args.get('cover')
-    token_receive = request.cookies.get('mytoken')
 
     # 담기 버튼일때 done = 1
     done = request.cookies.get('done')
@@ -25,7 +24,15 @@ def detail():
         done = 1
     else:
         done = 0
-    return render_template('detail.html', token=token_receive, rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
+
+    token_receive = request.cookies.get('mytoken')
+
+    if token_receive is None:
+        return render_template('detail.html', rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
+
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    id = payload['id']
+    return render_template('detail.html', token=token_receive, id=id, rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
 
 @blueprint.route('/review', methods=['POST'])
 def test_post():
