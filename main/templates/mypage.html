@@ -65,6 +65,29 @@
             margin:20px 0px 0px 950px;
         }
 
+        .test {
+            display: flex;
+        }
+
+        .album {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            margin: 10px;
+            font-size: 30px;
+        }
+
+        .album.special {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: red;
+        }
+
+        .album span{
+            font-size: 30px;
+        }
     </style>
     <script>
 <!--    메인으로 돌아가는 기능    -->
@@ -126,8 +149,8 @@
             <ul class="nav__item">
                 {% set token = token %}
                 {% if token %}
-                    <a href="/mypage">
-                        <li class="nav__list">마이페이지</li>
+                    <a href="/">
+                        <li class="nav__list">메인페이지</li>
                     </a>
                     <a>
                         <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
@@ -145,10 +168,21 @@
     </header>
 <!--  마이페이지 제일 큰 틀  -->
     <div class="artist-main-info">
-        <div class="mypage">마이 페이지</div>
-        <button type="button" class="btn btn-primary main_button" onclick="to_main()">돌아가기</button>
-        <div>
-        <div class="mylike"  >
+        <h1 style="font-size: 40px; color: red">{{ id }}님의 플레이리스트</h1>
+        <div class="test">
+            <div class="album">1번</div>
+            <div class="album">2번</div>
+            <div class="album special">
+                <span>앨범명</span>
+                <span>곡 제목</span>
+                <span>가수명</span>
+            </div>
+            <div class="album">3번</div>
+            <div class="album">4번</div>
+        </div>
+
+
+        <div class="mylike" >
 <!--            밑에 내가 추가한 노래 목록-->
             <table class="table"  >
                 <thead>
@@ -165,7 +199,6 @@
                 </tbody>
             </table>
             <p></p>
-        </div>
         </div>
     </div>
 </body>
