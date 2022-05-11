@@ -32,7 +32,7 @@
                         let star = rows[i]['star']
                         let id = rows[i]['id']
 
-                        let temp_html = `<li class="review-doc">
+
                         let star_image = '⭐'.repeat(star)
 
                         let temp_html = ``
@@ -46,10 +46,6 @@
                                                 ${comment}
                                             </span>
                                             <span class="review-text" id="review-star">
-                                                ${star}
-                                            </span>
-                                            <span class="review-text" id="review-time">
-                                                작성시간
                                                 ${star_image}
                                             </span>
                                         </li>`
@@ -58,7 +54,6 @@
                         }
                         $('#review-box').append(temp_html)
                     }
-
                 }
             });
         }
@@ -71,10 +66,10 @@
             $.ajax({
                 type: "POST",
                 url: "/review",
-                data: {comment_give: comment, star_give: star},
+
                 data: {comment_give: comment, star_give: star, rank_give: rank},
                 success: function (response) {
-                    if(response.result == 'fail') {
+
                     if (response.result == 'fail') {
                         alert(response['msg']);
                         location.href = '/loginForm';
@@ -111,28 +106,7 @@
     </script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
-        </div>
-        <nav class="nav-bar">
-            <ul class="nav__item">
-                {% set token = token %}
-                {% if token %}
-                    <a href="#">
-                        <li class="nav__list">마이페이지</li>
-                    </a>
-                    <a onclick="logout()">
-                        <li class="nav__list">로그아웃</li>
-                    </a>
-                {% else %}
-                    <a href="/loginForm">
-                        <li class="nav__list">로그인</li>
-                    </a>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+
 <header>
     <div class="logo">
         <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
@@ -180,7 +154,7 @@
                     </span>
             </li>
 
-            <button class="add-btn" type="button">담기</button>
+
             <button onclick="get()" class="submit-btn" type="button">등록</button>
         </div>
 
@@ -206,7 +180,6 @@
         </div>
     </div>
     <hr>
-    <div class="footer">
     <div class="footer" id="footer">
 
         <h3>리뷰 작성</h3>
