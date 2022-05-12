@@ -1,3 +1,9 @@
+.header__container {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../image/cover.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
 li {
     list-style: none;
 }
@@ -34,7 +40,7 @@ a:hover {
     font-size: 80px;
     margin-bottom: 20px;
 }
-.review-footer {
+.review-add {
     font-size: 40px;
 }
 .main {
@@ -54,6 +60,13 @@ a:hover {
 
     padding: 30px;
 
+}
+.review-box {
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 15px;
+
+    margin-bottom: 10px;
 }
 .review-insert {
     padding: 20px;
@@ -155,6 +168,14 @@ li.review-doc {
     background-color: rgba(0, 0, 0, 0);
     color: skyblue;
     padding: 5px;
+}
+.span-grid {
+    display: grid;
+    grid-template-columns: 100px 20px 50px 20px 100px;
+}
+.id-span {
+    width: 100px;
+    margin-right: 50px;
 }
 
 hr {

@@ -94,9 +94,9 @@
 <div class="main">
     <div class="music-info" id="music-info">
         <div class="song-image">
-            <img src="{{ cover }}" class="cover-image"
+            <img src="{{ cover }}" class="music-image"
                  style="margin-right: 30px;">
-            
+            <div class="info"></div>
         </div>
         <div class="song-info" id="song-info">
             <p class="title-size">{{title}}</p>
@@ -129,22 +129,13 @@
     <div class="review">
         <h2 class="txt">리뷰 모음</h2>
         <div class="review-moeum" id="review-box">
-            <li class="review-doc">
-                    <span class="review-text" id="review-id">
-                        닉네임
-                    </span>
-                <span class="review-text" id="review-comment">
-                        코멘트
-                    </span>
-                <span class="review-text" id="review-star">
-                        별점
-                    </span>
-            </li>
+
+
         </div>
     </div>
     <hr>
     <div class="footer" id="footer">
-        <p class="review-footer">리뷰 작성</p>
+        <p class="review-add">리뷰 작성</p>
         <div class="input">
             <input class="text" id="comment">
             <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">

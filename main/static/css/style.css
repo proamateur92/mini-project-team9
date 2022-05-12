@@ -5,10 +5,13 @@
 @import url('./reset.css');
 :root {
     /*color*/
+    --main-light-color: #6fc1fc;
     --main-color: #1da2ff;
+    --main-dark-color: #0a8be7;
     --white: #ffffff;
     --black: #000000;
-    --normal-gray: #757575;
+    --light-gray: #dcdcdc;
+    --normal-gray: #afafaf;
 }
 
 html,

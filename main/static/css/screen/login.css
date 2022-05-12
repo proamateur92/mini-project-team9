@@ -52,6 +52,7 @@
     margin-left: 200px;
     background-color: var(--main-color);
     color: var(--white);
+    transition: all 200ms ease-in-out;
 }
 
 .button-container button {
@@ -60,5 +61,12 @@
     background-color: var(--main-color);
     color: var(--white);
     margin: 5px 4px;
+    transition: all 200ms ease-in-out;
 }
 
+.button-container button:hover,
+.id-checker:hover {
+    background-color: var(--main-dark-color);
+    color: var(--light-gray);
+    transform: scale(1.1);
+}
