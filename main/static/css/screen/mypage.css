@@ -57,17 +57,11 @@
 }
 
 .album {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     background-color: lightgray;
-    /*object-fit:cover;*/
-    /*background-image:url("{{ i['cover'] }}");*/
     margin: 10px;
     font-size: 30px;
-}
-
-.album:hover{
-    background-color: red;
 }
 
 .album.special {
@@ -80,8 +74,4 @@
 
 .album span {
     font-size: 30px;
-}
-
-.idpli{
-    height:80px;
 }
