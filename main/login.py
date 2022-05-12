@@ -21,7 +21,7 @@ def hey():
 def home():
     token_receive = request.cookies.get('mytoken')
     if token_receive is not None:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256']).decode('utf-8')
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('mainpage.html', token=token_receive, id=user_info["id"])
 
@@ -53,7 +53,7 @@ def user_register():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
 
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest().decode('utf-8')
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
     doc = {'id': id_receive, 'password': pw_hash}
     db.user.insert_one(doc)
 
@@ -75,7 +75,7 @@ def user_login():
         payload = {
             'id': id_receive,
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
