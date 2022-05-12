@@ -52,6 +52,11 @@
     margin: 20px 0px 0px 950px;
 }
 
+.mypli{
+    width:800px;
+    padding-left: 100px;
+}
+
 .test {
     display: flex;
 }
@@ -62,6 +67,10 @@
     background-color: lightgray;
     margin: 10px;
     font-size: 30px;
+}
+
+.album:hover{
+    color:red;
 }
 
 .album.special {
