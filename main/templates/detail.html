@@ -3,93 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
     <script src="../static/js/logout.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/detailstyle.css">
+    <script src="../static/js/detail.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/screen/detail.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    <title>상세페이지</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>뮤플리 - 상세페이지</title>
     <script>
-        $(document).ready(function () {
-            add();
-        });
-        function add() {
-            $.ajax({
-                type: "GET",
-                url: "/review",
-                data: {},
-                success: function (response) {
-                    let rows = response['reviews']
-                    for (let i = 0; i < rows.length; i++) {
-                        let rank = rows[i]['rank']
-                        let comment = rows[i]['comment']
-                        let star = rows[i]['star']
-                        let id = rows[i]['id']
-
-                        let star_image = '⭐'.repeat(star)
-
-                        let temp_html = ``
-
-                        if ("{{rank}}" == rank) {
-                            temp_html = `<li class="review-doc">
-                                            <span class="review-text" id="review-id">
-                                                ${id}
-                                            </span>
-                                            <span class="review-text" id="review-comment">
-                                                ${comment}
-                                            </span>
-                                            <span class="review-text" id="review-star">
-                                                ${star_image}
-                                            </span>
-                                        </li>`
-                        } else {
-                            temp_html = ``
-                        }
-                        $('#review-box').append(temp_html)
-                    }
-                }
-            });
-        }
-
-        function submit() {
-            let comment = $('#comment').val()
-            let star = $("input[name='rating']:checked").val()
-            let rank = "{{rank}}"
-
-            $.ajax({
-                type: "POST",
-                url: "/review",
-
-                data: {comment_give: comment, star_give: star, rank_give: rank},
-                success: function (response) {
-
-                    if (response.result == 'fail') {
-                        alert(response['msg']);
-                        location.href = '/loginForm';
-                    } else {
-                        alert('리뷰를 등록하였습니다.');
-                        location.reload();
-                    }
-                }
-            })
-        }
-
         function get() {
             let cover = "{{cover}}"
             let singer = "{{singer}}"
             let album = "{{album}}"
             let title = "{{title}}"
-
             $.ajax({
                 type: "POST",
                 url: "/detail",
-                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album,},
+                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
                 success: function (response) {
                      if (response.result == 'fail') {
                         alert(response['msg']);
@@ -102,24 +34,11 @@
             })
         }
 
-        function remove(rank) {
-            alert(rank)
-            $.ajax({
-                type: "POST",
-                url: "/remove",
-                data: {},
-                success: function (response) {
-                    alert('담기 취소하였습니다.')
-                }
-            })
-        }
-
         function remove() {
             let cover = "{{cover}}"
             let singer = "{{singer}}"
             let album = "{{album}}"
             let title = "{{title}}"
-
 
             $.ajax({
                 type: "POST",
@@ -139,32 +58,38 @@
     </script>
 </head>
 <body>
-
 <header>
-    <div class="logo">
-        <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
+    <div class="header__container">
+        <div class="logo">
+            <a href="/"><i class="fa-brands fa-spotify fa-4x"></i></a>
+        </div>
+        <nav class="nav-bar">
+            <ul class="nav__item">
+                {% set token = token %}
+                {% if token %}
+                <a href="/">
+                    <li class="nav__list">메인페이지</li>
+                </a>
+                <a href="/mypage?id={{ id }}">
+                    <li class="nav__list">마이페이지</li>
+                </a>
+                <a>
+                    <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
+                </a>
+                {% else %}
+                 <a href="/">
+                    <li class="nav__list">메인페이지</li>
+                </a>
+                <a href="/loginForm">
+                    <li class="nav__list">로그인</li>
+                </a>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
-    <nav class="nav-bar">
-        <ul class="nav__item">
-            {% set token = token %}
-            {% if token %}
-            <a href="#">
-                <li class="nav__list">마이페이지</li>
-            </a>
-            <a onclick="logout()">
-                <li class="nav__list">로그아웃</li>
-            </a>
-            {% else %}
-            <a href="/loginForm">
-                <li class="nav__list">로그인</li>
-            </a>
-            {% endif %}
-        </ul>
-    </nav>
 </header>
 <div class="main">
     <div class="music-info" id="music-info">
-        <h1 style="font-size: 50px;">{{ singer }}</h1>
         <div class="song-image">
             <img src="{{ cover }}"
                  style="margin-right: 30px;">
@@ -187,21 +112,21 @@
                     </span>
             </li>
             <li>
-            <h1>{{ done }}</h1>
                 {% if done == 0 %}
                     <button onclick="remove({{ rank }})">등록 취소</button>
                 {% else %}
-                    <button onclick="get()">등록</button>
+                    <button onclick="get()" >등록 </button>
                 {% endif %}
+            </li>
+            <li>
+                <button onclick="remove({{ rank }})">등록 취소</button>
             </li>
             <!--
             <li>
                 <button onclick="get()" class="submit-btn" type="button">등록</button>
             </li>
             -->
-
         </div>
-
     </div>
     <hr>
     <div class="review">
@@ -222,9 +147,7 @@
     </div>
     <hr>
     <div class="footer" id="footer">
-
         <h3>리뷰 작성</h3>
-
         <div class="input">
             <input class="text" id="comment">
             <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">
