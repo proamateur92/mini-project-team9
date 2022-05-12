@@ -11,8 +11,13 @@ blueprint = Blueprint("mypage", __name__, url_prefix="/")
 def mypage():
     token_receive = request.cookies.get('mytoken')
     id = request.args.get('id')
+
+    # 로그인한 사용자의 id를 가져와 playlist 목록 가져오기
+    mypli = list(db.mymusic.find({'id':id}))
+
     if token_receive:
-        return render_template('mypage.html', token=token_receive, id=id)
+        # mypage.html로 token, id, mypli 값을 보내겠다. -> html에서 {{ id }} 이런 식(파이썬 코드)으로 가져다 쓸 수 있음.
+        return render_template('mypage.html', token=token_receive, id=id, mypli=mypli)
     return render_template('loginForm.html')
 
 # db에 들어온 정보들을 플레이리스트로 저장해서 넘겨줘요

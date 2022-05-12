@@ -1,9 +1,22 @@
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.nav__list {
+    font-size: 50px;
+    font-weight: 400;
+    color: var(--main-color);
+}
+
 .nav__item {
     display: flex;
 }
 
 .nav__item a {
-    margin-left: 30px;
+    margin-left: 40px;
 }
 
 #logout {

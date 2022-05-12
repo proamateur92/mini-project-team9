@@ -7,177 +7,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/screen/mainpage.css">
     <script src="../static/js/logout.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#show_list').empty();
-            show_list();
-        });
+    <script src="../static/js/mainpage.js"></script>
 
-        function show_list() {
-            $.ajax({
-                type: "GET",
-                url: "/musiclist",
-                data: {},
-                success: function (response) {
-                    let rows = response['chart']
-                    for (let i = 0; i < rows.length; i++) {
-                        let rank = rows[i]['rank']
-                        let title = rows[i]['title']
-                        let singer = rows[i]['singer']
-                        let album = rows[i]['album']
-                        let cover = rows[i]['cover']
-                        let temp_html =
-                            `
-
-
-                                    <tr onclick="location.href='/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}'" class="lists">
-                                    <th scope="row" >${rank}</th>
-                                    <td >${title}</td>
-                                    <td >${singer}</td>
-                                    <td ><img src="${cover}"></td>
-                                    <td >${album}</td>
-                                    <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
-
-                             </tr>`
-                            console.log(rows)
-
-                        $('#show_list').append(temp_html)
-
-                        function hey() {
-                            $.ajax({
-                                type: 'POST',
-                                url: '/hey',
-                                data: {'text': $('#no').val()},
-                                success: response => {
-                                    if (response.result) {
-                                        alert(1);
-                                    } else {
-                                        alert(2);
-                                    }
-                                }
-                            })
-                        }
-
-                        // 로그인하기 창을 누르면 로그인,회원가입 창으로 이동하기위해 만든 함수
-                        function to_login() {
-                            window.location.href = "/user/login"
-                        }
-
-                        function to_mypage() {
-                            window.location.href = "/index";
-                        }
-                    }
-                }
-            })
-        }
-    </script>
     <title>뮤플리 - 메인페이지</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            font-family: 'Gowun Dodum', sans-serif;
-        }
-
-        .mytitle {
-            width: 100%;
-            height: 250px;
-
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('');
-            background-position: center;
-            background-size: cover;
-
-            color: white;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mytitle > button {
-            width: 200px;
-            height: 50px;
-
-            background-color: transparent;
-            color: white;
-
-            border-color: white;
-            border-radius: 50px;
-            border: 1px solid white;
-
-            margin-top: 10px;
-        }
-
-        .mytitle > button:hover {
-            border: 2px solid white;
-        }
-
-
-        .categori {
-            color: gray;
-        }
-
-        .mycards {
-            margin: 20px auto 0px auto;
-            width: 95%;
-            max-width: 1200px;
-        }
-
-        .mypost {
-            width: 95%;
-            max-width: 500px;
-            margin: 20px auto 0px auto;
-            padding: 20px;
-            box-shadow: 0px 0px 3px 0px gray;
-        }
-
-        .mybtns {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-
-            margin-top: 20px;
-        }
-
-        .mybtns > button {
-            margin-right: 10px;
-        }
-
-        .lists {
-            height: 100px;
-        }
-
-
-    </style>
-</head>
+ </head>
     <body>
         <header>
-            <div class="logo">
-                <a href="/"><i class="fa-brands fa-spotify fa-3x"></i></a>
+            <div class="header__container">
+                <div class="logo">
+                    <a href="/"><i class="fa-brands fa-spotify fa-4x"></i></a>
+                </div>
+                <nav class="nav-bar">
+                    <ul class="nav__item">
+                        {% set token = token %}
+                        {% if token %}
+                            <a href="/mypage?id={{ id }}">
+                                <li class="nav__list">마이페이지</li>
+                            </a>
+                            <a>
+                                <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
+                            </a>
+                        {% else %}
+                            <a href="/loginForm">
+                                <li class="nav__list">로그인</li>
+                            </a>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
-            <nav class="nav-bar">
-                <ul class="nav__item">
-                    {% set token = token %}
-                    {% if token %}
-                        <a href="/mypage?id={{ id }}">
-                            <li class="nav__list">마이페이지</li>
-                        </a>
-                        <a>
-                            <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
-                        </a>
-                    {% else %}
-                        <a href="/loginForm">
-                            <li class="nav__list">로그인</li>
-                        </a>
-                    {% endif %}
-                </ul>
-            </nav>
         </header>
         <div class="mytitle">
         </div>
