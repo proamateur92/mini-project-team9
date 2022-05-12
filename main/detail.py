@@ -94,13 +94,14 @@ def get():
 
 # db.mymusic.update_one({'done':[0]}, {'$set': {'done': 1}})
 
-@blueprint.route('/remove', methods=['POST'])
+@blueprint.route('/detail/remove', methods=['POST'])
 def remove():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+       
         id = db.user.find_one({"id": payload['id']})['id']
-        # db.mymusic.delete({'id': singer_receive})
+        db.mymusic.delete_one({'id': payload['id']})
         # 아이디 별로 index + 1
 
         return render_template('detail.html', id=id)

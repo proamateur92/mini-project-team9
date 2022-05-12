@@ -42,7 +42,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/detail",
+                url: "/detail/remove",
                 data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
                 success: function (response) {
                      if (response.result == 'fail') {
@@ -113,13 +113,13 @@
             </li>
             <li>
                 {% if done == 0 %}
-                    <button onclick="remove({{ rank }})">등록 취소</button>
+                    <button type="button" onclick="remove( {{ id }} )">등록 취소</button>
                 {% else %}
-                    <button onclick="get()" >등록 </button>
+                    <button type="button" onclick="get()" >등록 </button>
                 {% endif %}
             </li>
             <li>
-                <button onclick="remove({{ rank }})">등록 취소</button>
+                <button type="button" onclick="remove({{ rank }})">등록 취소</button>
             </li>
             <!--
             <li>
