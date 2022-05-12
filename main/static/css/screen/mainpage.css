@@ -119,6 +119,7 @@ table, th, td {
 .coverphoto {
     width: 140px;
     height: 140px;
+    border-radius: 20px;
 }
 
 table>table-hover {
