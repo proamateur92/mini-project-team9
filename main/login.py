@@ -65,19 +65,22 @@ def user_register():
 def user_login():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-    # 회원가입 때와 같은 방법으로 pw를 암호화
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-    # 가입된 유저 정보 확인
-    result = db.user.find_one({'id': id_receive, 'password': pw_hash})
 
-    # 찾으면 JWT 토큰을 만들어 발급
-    if result is not None:
-        payload = {
-            'id': id_receive,
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    try:
+        # 회원가입 때와 같은 방법으로 pw를 암호화
+        pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+        # 가입된 유저 정보 확인
+        result = db.user.find_one({'id': id_receive, 'password': pw_hash})
 
-        return jsonify({'result': 'success', 'token': token})
+        # 찾으면 JWT 토큰을 만들어 발급
+        if result is not None:
+            payload = {
+                'id': id_receive,
+            }
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+            return jsonify({'result': 'success', 'token': token})
+        else:
+            return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})
     # 찾지 못하면
-    else:
+    except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})
