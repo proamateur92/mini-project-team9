@@ -72,7 +72,6 @@ function is_password(asValue) {
 }
 
 function join() {
-    alert('aaaaaaaaaaaaaaaaaaaaaaaaaa')
     if($('#userid').val() === '') {
         alert('아이디를 입력해주세요.');
         $('#userid').focus();
