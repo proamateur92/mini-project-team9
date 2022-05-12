@@ -66,5 +66,29 @@
 
 .lists {
     height: 100px;
+    cursor: pointer; /*마우스 커서 모양 변환*/
+}
+
+table, th, td {
+
+  }
+  table {
+
+  }
+
+
+  th {
+    vertical-align: middle;  /*글자들 세로 줄맞추기*/
+    font-size: 20px;
+  }
+  td {
+      vertical-align: middle;
+      font-size: 30px;
+
+  }
+
+.header_list {
+
+    font-size: 20px;
 }
 

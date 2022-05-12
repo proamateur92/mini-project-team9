@@ -20,14 +20,15 @@ function show_list() {
                     `
                             <tr onclick="location.href='/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}'" class="lists">
                             <th scope="row" >${rank}</th>
-                            <td >${title}</td>
+                            <td  >${title}</td>
                             <td >${singer}</td>
                             <td ><img src="${cover}"></td>
                             <td >${album}</td>
                             <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
 
                      </tr>`
-                    console.log(rows)
+
+
 
                 $('#show_list').append(temp_html)
 
