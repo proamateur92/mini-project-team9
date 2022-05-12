@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=slice&color=f8bbd0&height=200&section=header&text=MUPLY!&fontSize=90&animation=fadeIn&fontAlignY=38&desc=%20&descAlignY=62&descAlign=62)
+![header](https://capsule-render.vercel.app/api?type=slice&color=gradient&height=200&section=header&text=MUPLY!&fontSize=90&animation=fadeIn&fontAlignY=38&desc=%20&descAlignY=62&descAlign=62)
 
 # 항해 99 미니 프로젝트🚤
 ## 프로젝트명: 뮤플리🎵
@@ -20,4 +20,4 @@
 
 ### 담당 기능
 
-![Footer](https://capsule-render.vercel.app/api?type=waving&color=f8bbd0&height=200&section=footer)
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=footer)
