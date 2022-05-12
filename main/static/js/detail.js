@@ -43,14 +43,12 @@ function submit() {
     let comment = $('#comment').val()
     let star = $("input[name='rating']:checked").val()
     let rank = "{{rank}}"
-
     $.ajax({
         type: "POST",
         url: "/review",
 
         data: {comment_give: comment, star_give: star, rank_give: rank},
         success: function (response) {
-
             if (response.result == 'fail') {
                 alert(response['msg']);
                 location.href = '/loginForm';
@@ -62,58 +60,3 @@ function submit() {
     })
 }
 
-function get() {
-    let cover = "{{cover}}"
-    let singer = "{{singer}}"
-    let album = "{{album}}"
-    let title = "{{title}}"
-
-    $.ajax({
-        type: "POST",
-        url: "/detail",
-        data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album,},
-        success: function (response) {
-             if (response.result == 'fail') {
-                alert(response['msg']);
-                location.href = '/loginForm';
-            } else {
-                alert('담기에 성공하셨습니다.');
-                location.reload();
-            }
-        }
-    })
-}
-
-function remove(rank) {
-    alert(rank)
-    $.ajax({
-        type: "POST",
-        url: "/remove",
-        data: {},
-        success: function (response) {
-            alert('담기 취소하였습니다.')
-        }
-    })
-}
-
-function remove() {
-    let cover = "{{cover}}"
-    let singer = "{{singer}}"
-    let album = "{{album}}"
-    let title = "{{title}}"
-
-    $.ajax({
-        type: "POST",
-        url: "/detail",
-        data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
-        success: function (response) {
-             if (response.result == 'fail') {
-                alert(response['msg']);
-                location.href = '/loginForm';
-            } else {
-                alert('취소에 성공하셨습니다.');
-                location.reload();
-            }
-        }
-    })
-}
