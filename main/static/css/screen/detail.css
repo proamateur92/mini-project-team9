@@ -28,16 +28,25 @@ a:hover {
 
 .title {
     width: 1500px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+.title-size {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+.review-size {
+    font-size: 40px;
 }
 .main {
 
     width: 1100px;
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 20px;
     margin-bottom: 20px;
 }
-
+.time {
+    color: gray;
+}
 .footer {
     width: 70%;
     text-align: left;
@@ -46,15 +55,25 @@ a:hover {
     padding: 30px;
 
 }
+.review-insert {
+    padding: 20px;
 
+}
+.review-footer {
+    color: gray;
+}
 .music-info {
     width: 70%;
-    height: 520px;
+    height: 330px;
     margin: 0 auto;
 
     margin-top: 30px;
     padding: 20px;
     display: flex;
+}
+img {
+    width: 300px;
+    border-radius: 20px;
 }
 
 .song-info {
@@ -73,11 +92,14 @@ a:hover {
     padding: 5px;
 }
 li.list {
+    font-size: 30px;
     display: grid;
+    margin-bottom:10px;
     grid-template-columns: 100px 1fr ;
 }
 
 .txt {
+    font-size: 40px;
     margin-top: 10px;
     margin-left: 20px;
     padding: 10px;
@@ -99,13 +121,15 @@ li.list {
 }
 
 .review-moeum {
+    font-size: 25px;
     margin-left: 30px;
     padding: 20px;
 }
 
 li.review-doc {
     display: grid;
-    grid-template-columns: 180px 180px 180px 180px;
+    grid-template-columns: 120px 400px 130px;
+    margin-bottom: 10px;
 }
 
 .input {
@@ -125,7 +149,9 @@ li.review-doc {
     border-radius: 5px;
     border: 1px solid skyblue;
 }
-
+.position-btn {
+    margin-top : 70px;
+}
 .submit-btn {
     margin-left: 20px;
     width: 50px;

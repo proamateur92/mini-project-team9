@@ -10,6 +10,7 @@ import jwt
 
 @blueprint.route('/detail')
 def detail():
+    # 선택된 곡 정보 가져오기
     rank = request.args.get('rank')
     title = request.args.get('title')
     if title is not None:
@@ -17,21 +18,21 @@ def detail():
     singer = request.args.get('singer')
     album = request.args.get('album')
     cover = request.args.get('cover')
+    done = 1
 
-    # 담기 버튼일때 done = 1
-    done = request.cookies.get('done')
-    if done is None:
-        done = 1
-    else:
-        done = 0
-
+    # 사용자 토큰 확인
     token_receive = request.cookies.get('mytoken')
 
     if token_receive is None:
         return render_template('detail.html', rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
 
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    id = payload['id']
+    id = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])['id']
+
+    # done값을 가져오기 위한 코드
+    result = db.mymusic.find_one({'rank':rank, 'id':id})
+    if result is not None:
+        done = 0
+
     return render_template('detail.html', token=token_receive, id=id, rank=rank, title=title[0], singer=singer, album=album, cover=cover, done=done)
 
 @blueprint.route('/review', methods=['POST'])
@@ -59,6 +60,7 @@ def test_get():
     review_total = list(db.review.find({}, {'_id': False}))
     return jsonify({'reviews':review_total})
 
+# 플레이리스트 담기 버튼 클릭
 @blueprint.route('/detail', methods=['POST'])
 def get():
     token_receive = request.cookies.get('mytoken')
@@ -66,11 +68,12 @@ def get():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
         id = db.user.find_one({"id": payload['id']})['id']
+        rank_receive = request.form['rank_give']
         cover_receive = request.form['cover_give']
         title_receive = request.form['title_give']
         album_receive = request.form['album_give']
         singer_receive = request.form['singer_give']
-
+        done_receive = request.form['done_give']
 
         # 아이디 별로 index + 1
         mymusic_index = list(db.mymusic.find({'id':id}))
@@ -79,14 +82,15 @@ def get():
         doc = {
             'id': id,
             'index': count,
+            'rank': rank_receive,
             'cover': cover_receive,
             'title': title_receive,
             'album': album_receive,
             'singer': singer_receive,
-            'done': 0
+            'done': done_receive
         }
+        print('doc', doc)
         db.mymusic.insert_one(doc)
-        done = 0
 
         return jsonify({'result':'success'})
     except jwt.exceptions.DecodeError:
@@ -98,13 +102,11 @@ def get():
 def remove():
     token_receive = request.cookies.get('mytoken')
     try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-       
-        id = db.user.find_one({"id": payload['id']})['id']
-        db.mymusic.delete_one({'id': payload['id']})
-        # 아이디 별로 index + 1
+        id = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])['id']
+        rank = request.form['rank_give']
+        db.mymusic.delete_one({'id': id, 'rank':rank})
 
-        return render_template('detail.html', id=id)
+        return jsonify({'result': 'success', 'msg': '취소에 성공하셨습니다', 'id': id})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 페이지로 이동합니다.'})
 

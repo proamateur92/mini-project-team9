@@ -19,7 +19,7 @@ function add() {
                 let temp_html = ``
 
                 if ("{{rank}}" == rank) {
-                    temp_html = `<li class="review-doc">
+                    temp_html = ` <li class="review-doc">
                                     <span class="review-text" id="review-id">
                                         ${id}
                                     </span>
@@ -29,7 +29,7 @@ function add() {
                                     <span class="review-text" id="review-star">
                                         ${star_image}
                                     </span>
-                                </li>`
+                                    </li>`
                 } else {
                     temp_html = ``
                 }

@@ -15,13 +15,15 @@
     <script>
         function get() {
             let cover = "{{cover}}"
+            let rank = "{{rank}}"
             let singer = "{{singer}}"
             let album = "{{album}}"
             let title = "{{title}}"
+            let done = 0;
             $.ajax({
                 type: "POST",
                 url: "/detail",
-                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
+                data: {rank_give: rank, cover_give: cover, title_give: title, singer_give: singer, album_give: album, done_give: done},
                 success: function (response) {
                      if (response.result == 'fail') {
                         alert(response['msg']);
@@ -35,22 +37,23 @@
         }
 
         function remove() {
-            let cover = "{{cover}}"
+            let rank = "{{rank}}"
+            let title = "{{title}}"
             let singer = "{{singer}}"
             let album = "{{album}}"
-            let title = "{{title}}"
+            let cover = "{{cover}}"
 
             $.ajax({
                 type: "POST",
                 url: "/detail/remove",
-                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
+                data: {rank_give: rank},
                 success: function (response) {
                      if (response.result == 'fail') {
                         alert(response['msg']);
                         location.href = '/loginForm';
                     } else {
-                        alert('취소에 성공하셨습니다.');
-                        location.reload();
+                        alert(response['msg']);
+                        location.href = `/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}`;
                     }
                 }
             })
@@ -112,20 +115,12 @@
                     </span>
             </li>
             <li>
-                {% if done == 0 %}
-                    <button type="button" onclick="remove( {{ id }} )">등록 취소</button>
-                {% else %}
+                {% if done != 0 %}
                     <button type="button" onclick="get()" >등록 </button>
+                {% else %}
+                    <button type="button" onclick="remove()">등록 취소</button>
                 {% endif %}
             </li>
-            <li>
-                <button type="button" onclick="remove({{ rank }})">등록 취소</button>
-            </li>
-            <!--
-            <li>
-                <button onclick="get()" class="submit-btn" type="button">등록</button>
-            </li>
-            -->
         </div>
     </div>
     <hr>
