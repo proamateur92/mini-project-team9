@@ -4,35 +4,22 @@
     background:  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../image/cover.jpg") center/cover no-repeat;
 }
 
-header {
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 40px
-}
-
 .hidden {
     display: none;
-}
-
-.nav__list {
-    font-size: 45px;
-    font-weight: 400;
-    color: var(--main-color);
 }
 
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
-    margin: 30px auto 0 auto;
-    padding: 30px;
+    justify-content: center;
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
 }
 
 .login-title {
-    font-size: 65px;
+    font-size: 95px;
     font-weight: 700;
     color: var(--main-color);
     margin-bottom: 20px;
@@ -43,10 +30,12 @@ header {
     background-color: inherit;
     border-bottom: 1px solid var(--white);
     color: var(--white);
+    font-size: 35px;
 }
 
 .login-container input::placeholder {
     color: var(--white);
+    font-size: 35px;
 }
 
 .button-container {
@@ -59,14 +48,15 @@ header {
 
 .id-checker {
     position: absolute;
-    margin-top: 96px;
-    margin-left: 160px;
+    margin-top: -66px;
+    margin-left: 200px;
     background-color: var(--main-color);
     color: var(--white);
 }
 
 .button-container button {
     cursor: pointer;
+    font-size: 35px;
     background-color: var(--main-color);
     color: var(--white);
     margin: 5px 4px;
