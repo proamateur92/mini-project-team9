@@ -40,8 +40,19 @@ function add() {
 }
 
 function submit() {
-    let comment = $('#comment').val()
-    let star = $("input[name='rating']:checked").val()
+    if($('#comment').val().trim() == '') {
+        alert('리뷰를 작성해주세요');
+        $('#comment').focus();
+        return
+    }
+
+    if(!$("input[name='rating']:checked").val()) {
+        alert('별점을 입력해주세요');
+        return
+    }
+
+    let comment = $('#comment').val();
+    let star = $("input[name='rating']:checked").val();
     let rank = "{{rank}}"
     $.ajax({
         type: "POST",
@@ -49,19 +60,8 @@ function submit() {
 
         data: {comment_give: comment, star_give: star, rank_give: rank},
         success: function (response) {
-            if ($.trim($('#comment').val())=='') {
-                alert("리뷰를 입력해주세요");
-                $("#comment").focus();
-                return;
-            }
-            if ($.trim($("input[name='rating']:checked").val())=='') {
-                alert("별점을 입력해주세요");
-                $("#comment").focus();
-                return;
-            } else {
-                alert('리뷰를 등록하였습니다.');
-                location.reload();
-            }
+            alert('리뷰를 등록하였습니다.');
+            location.reload();
         }
     })
 }
