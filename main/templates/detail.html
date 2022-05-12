@@ -58,6 +58,7 @@
                 }
             })
         }
+
     </script>
 </head>
 <body>
@@ -118,14 +119,13 @@
             </li>
             <li>
                 {% if done != 0 %}
-                    <button type="button" onclick="get()" class="add">등록 </button>
+                    <button type="button" onclick="get()" class="add">플레이 리스트 담기</button>
                 {% else %}
-                    <button type="button" onclick="remove()" class="add">등록 취소</button>
+                    <button type="button" onclick="remove()" class="add">플레이 리스트 담기 취소</button>
                 {% endif %}
             </li>
         </div>
     </div>
-    <hr>
     <div class="review">
         <h2 class="txt">리뷰 모음</h2>
         <div class="review-moeum" id="review-box">
@@ -133,11 +133,10 @@
 
         </div>
     </div>
-    <hr>
     <div class="footer" id="footer">
         <p class="review-add">리뷰 작성</p>
         <div class="input">
-            <input class="text" id="comment">
+            <input class="text" id="comment" placeholder="리뷰를 남겨보세요!">
             <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">
                 <fieldset>
                     <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
@@ -151,6 +150,5 @@
         </div>
     </div>
 </div>
-<hr>
 </body>
 </html>

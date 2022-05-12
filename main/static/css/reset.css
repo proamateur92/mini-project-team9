@@ -51,7 +51,7 @@ body {
 }
 a {
 	text-decoration: none;
-	color: #0195FC;
+	color: var(--main-color);
 }
 input, button {
 	font-family: 'Dongle', sans-serif;

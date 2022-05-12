@@ -3,26 +3,10 @@ from flask import Blueprint
 
 app = Flask(__name__)
 
-
-
 SECRET_KEY = 'likeMusic'
 
 blueprint = Blueprint("user", __name__, url_prefix="/")
 
-# 리뷰 남기기 예제 코드
-# @blueprint.route('/write_review', methods=['POST'])
-# def write_review():
-#     token_receive = request.cookies.get('mytoken')
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#         user_info = db.user.find_one({"id": payload['id']})
-#         # 리뷰 작성 - DB 작업
-#         print('리뷰 작성할 아이디', user_info['id'])
-#         return render_template('detailTest.html', id=user_info["id"])
-#     except jwt.exceptions.DecodeError:
-#         return jsonify({'result':'fail', 'msg':'로그인 페이지로 이동합니다.'})
-
-# 토큰 값 가져오기 예제 코드
 @blueprint.route('/hey', methods=['POST'])
 def hey():
     token_receive = request.cookies.get('mytoken')
@@ -43,15 +27,6 @@ def home():
 
     return render_template('mainpage.html')
 
-
-
-# token_receive = request.cookies.get('mytoken')
-# try:
-#     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#     user_info = db.user.find_one({"id": payload['id']})
-#     return render_template('mainpage.html', id=user_info["id"])
-# except jwt.exceptions.DecodeError:
-#     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 @blueprint.route('/loginForm')
 def loginForm():
     msg = request.args.get("msg")
@@ -64,7 +39,6 @@ def id_checker():
     id_check = db.user.find_one({'id': id_receive})
     result = False
     msg = '중복된 아이디입니다.'
-
     # id 중복확인 후 중복이 아니면 true값 리턴
     if id_check is None:
         result = True

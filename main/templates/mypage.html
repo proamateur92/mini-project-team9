@@ -47,13 +47,13 @@
         <div class="mypli">
             <div class="empty-box"></div>
             <hr>
-            <h1 style="font-size: 70px; color: lightblue">{{ id }}님의 플레이리스트</h1>
+            <h1 style="font-size: 70px; color: pink">{{ id }}님의 플레이리스트</h1>
             <hr>
             <div class="artist-main-info">
                 <div class="test">
                     <div class="box-wrap">
                         {% for i in mypli %}
-                            <div class="box" onclick="to_detail()">
+                            <div class="box">
                                 <div class="img">
                                     <img src="{{ i['cover'] }}" alt="앨범커버" class="image" style="width:100%"/>
                                 </div>

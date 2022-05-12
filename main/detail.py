@@ -41,10 +41,16 @@ def test_post():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
+        year_receive = request.form['year_give']
+        month_receive = request.form['month_give']
+        date_receive = request.form['date_give']
         rank_receive = request.form['rank_give']
         comment_receive = request.form['comment_give']
         star_receive = request.form['star_give']
         doc = {
+            'year': year_receive,
+            'month': month_receive,
+            'date': date_receive,
             'rank': rank_receive,
             'id': user_info['id'],
             'comment': comment_receive,
