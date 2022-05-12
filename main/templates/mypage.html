@@ -50,11 +50,21 @@
         <h1 style="font-size: 40px; color: red">{{ id }}님의 플레이리스트</h1>
         <div class="artist-main-info">
             <div class="test">
-                <div class="album">
+                <div class="card">
                     {% for i in mypli %}
+
     {#                    <h1>{{ i['id'] }}<h1>#}
     {#                    {{ i['index'] }}#}
-                        <img src="{{ i['cover'] }}"/>
+                        <img src="{{ i['cover'] }}"  alt="앨범커버" class="image" style="width:20%"/>
+                            <div class="inner-content">
+                                <div class="title">{{ i['title'] }}<br>
+                                    {{ i['singer'] }}<br>
+                                    {{ i['album'] }}
+                                </div>
+                                <div class="text">{{ i['title'] }} <br>
+                                    {{ i['singer'] }}<br>
+                                    {{ i['album'] }}</div>
+                            </div>
                     {% endfor %}
                 </div>
     {#            <div class="album">1번</div>#}
