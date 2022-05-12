@@ -16,18 +16,22 @@ function show_list() {
                 let singer = rows[i]['singer']
                 let album = rows[i]['album']
                 let cover = rows[i]['cover']
+
                 let temp_html =
                     `
                             <tr onclick="location.href='/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}'" class="lists">
                             <th scope="row" >${rank}</th>
-                            <td >${title}</td>
-                            <td >${singer}</td>
+                            <td  >${title.replace(/%27/gi,"\'")}</td> //replace함수를 이용해서 '를 표현가능
+                            <td >${singer.replace(/%27/gi,"\'")}</td>
                             <td ><img src="${cover}"></td>
-                            <td >${album}</td>
-                            <td><button  type="button"  class="btn btn-outline-success" >담기</button></td>
+                            <td >${album.replace(/%27/gi,"\'")}</td>
+                            
 
                      </tr>`
-                    console.log(rows)
+
+
+
+
 
                 $('#show_list').append(temp_html)
 
