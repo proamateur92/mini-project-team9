@@ -20,12 +20,15 @@ def hey():
 @blueprint.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
-    if token_receive is not None:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('mainpage.html', token=token_receive, id=user_info["id"])
-
-    return render_template('mainpage.html')
+    try:
+        if token_receive is not None:
+            payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+            user_info = db.user.find_one({"id": payload['id']})
+            return render_template('mainpage.html', token=token_receive, id=user_info["id"])
+        else:
+            return render_template('mainpage.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('mainpage.html')
 
 @blueprint.route('/loginForm')
 def loginForm():
