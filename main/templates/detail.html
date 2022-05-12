@@ -8,11 +8,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
     <script src="../static/js/logout.js"></script>
-    <script src="../static/js/detail.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/screen/detail.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <title>뮤플리 - 상세페이지</title>
     <script>
+        $(document).ready(function () {
+            add();
+        });
+
         function get() {
             let cover = "{{cover}}"
             let rank = "{{rank}}"
@@ -20,6 +23,7 @@
             let album = "{{album}}"
             let title = "{{title}}"
             let done = 0;
+
             $.ajax({
                 type: "POST",
                 url: "/detail",
@@ -58,6 +62,8 @@
                 }
             })
         }
+
+        // 노래 별 리뷰 작성
         function submit() {
             if($('#comment').val().trim() == '') {
                 alert('리뷰를 작성해주세요');
@@ -89,6 +95,48 @@
                     location.reload();
                 }
             })
+        }
+
+        // 노래 별 리뷰 가져오기
+        function add() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    let rows = response['reviews']
+                    for (let i = 0; i < rows.length; i++) {
+                        let rank = rows[i]['rank']
+                        let comment = rows[i]['comment']
+                        let star = rows[i]['star']
+                        let id = rows[i]['id']
+                        let year = rows[i]['year']
+                        let month = rows[i]['month']
+                        let date = rows[i]['date']
+
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let temp_html = ``
+
+                        if ("{{rank}}" == rank) {
+                            temp_html = `
+                                            <div class="review-box">
+                                            <div class="review-header">
+                                            <p class = "span-grid"><span class="id-span">${id}</span> <span style="color: lightgray;">|</span> <span class="id-time">${year}.${month}.${date}</span> <span style="color: lightgray;">|</span> <span class="get-star">${star_image}</span></p>
+                                            </div>
+                                            <hr>
+                                            <div class="review-footer">
+                                                ${comment}
+                                            </div>
+                                            </div>`
+                        } else {
+                            temp_html = ``
+                        }
+                        $('#review-box').append(temp_html)
+                    }
+                }
+            });
         }
     </script>
 </head>
