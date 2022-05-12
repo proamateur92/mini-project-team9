@@ -52,16 +52,26 @@
     margin: 20px 0px 0px 950px;
 }
 
+.mypli{
+    width:800px;
+    padding-left: 100px;
+}
+
 .test {
     display: flex;
 }
 
 .album {
-    width: 100px;
-    height: 100px;
-    background-color: lightgray;
+    /*width: 200px;*/
+    /*height: 2   00px;*/
+    /*background-color: lightgray;*/
     margin: 10px;
     font-size: 30px;
+}
+
+.album:hover{
+    background-color:red;
+
 }
 
 .album.special {
@@ -75,3 +85,109 @@
 .album span {
     font-size: 30px;
 }
+
+
+.card {
+    position: relative;
+    background: linear-gradient(180deg, #441DB2 0%, #0d0425 100%);
+    width: 12rem;
+    overflow: hidden;
+    box-shadow: 15px 15px 25px black;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    /* 포스터 크기 조정을 위해 scale 조정 */
+    transform: scale(1.1);
+    transition: all 0.25s linear;
+}
+
+.card:hover img {
+    opacity: 0.2;
+    transform: scale(1.25);
+}
+
+.card .inner-content {
+    width: 80%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transition: all 600ms ease;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover .inner-content {
+    opacity: 1;
+    top: 50%;
+}
+
+.card .inner-content .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.card .inner-content .overview {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.card .inner-content hr {
+    border-top: 1px solid #f1f1f1;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.image {*/
+/*    opacity: 1;*/
+/*    display: block;*/
+/*    !*width: 100%;*!*/
+/*    height: auto;*/
+/*    transition: .5s ease;*/
+/*    backface-visibility: hidden;*/
+/*}*/
+
+/*.middle {*/
+/*    transition: .5s ease;*/
+/*    opacity: 0;*/
+/*    position: sticky;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    -ms-transform: translate(-50%, -50%);*/
+/*    text-align: match-parent;*/
+/*}*/
+
+/*.container:hover .image {*/
+/*    opacity: 0.3;*/
+/*}*/
+
+/*.container:hover .middle {*/
+/*    opacity: 1;*/
+/*}*/
+
+/*.text {*/
+/*    background-color: darkgray;*/
+/*    color: white;*/
+/*    font-size: 18px;*/
+/*    padding: 16px 32px;*/
+/*    width: 150px;*/
+/*    height: 100px;*/
+/*}*/
