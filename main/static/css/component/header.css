@@ -19,6 +19,11 @@
     margin-left: 40px;
 }
 
+.nav__list:hover,
+.logo i:hover {
+    color: var(--white);
+
+}
 #logout {
     cursor: pointer;
 }
