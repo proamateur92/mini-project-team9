@@ -71,12 +71,13 @@ a {
 }
 
 .footer {
+    margin-left: 55px;
     width: 70%;
     text-align: left;
 }
 
 .review-box {
-    border: 1px solid gray;
+    border: 1px solid #F8BBD0FF;
     border-radius: 10px;
     padding: 15px;
 
@@ -92,6 +93,7 @@ a {
     padding: 40px;
     display: flex;
     margin: 50px 0;
+    border: 1px solid #F8BBD0FF;
     border-radius: 15px;
     background-color: var(--light-gray);
     box-shadow: 0 0 3px 0 gray;
@@ -197,10 +199,6 @@ li.review-doc {
     margin-right: 50px;
 }
 
-hr {
-    border: none;
-    border: 1px solid gray;
-}
 
 
 #myform fieldset {
