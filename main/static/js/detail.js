@@ -19,17 +19,16 @@ function add() {
                 let temp_html = ``
 
                 if ("{{rank}}" == rank) {
-                    temp_html = ` <li class="review-doc">
-                                    <span class="review-text" id="review-id">
-                                        ${id}
-                                    </span>
-                                    <span class="review-text" id="review-comment">
+                    temp_html = ` 
+                                    <div class="review-box">
+                                    <div class="review-header">
+                                    <p class = "span-grid"><span class="id-span">${id}</span> <span style="color: lightgray;">|</span> <span class="id-time">날짜</span> <span style="color: lightgray;">|</span> <span class="get-star">${star_image}</span></p>
+                                    </div>
+                                    <hr>
+                                    <div class="review-footer">
                                         ${comment}
-                                    </span>
-                                    <span class="review-text" id="review-star">
-                                        ${star_image}
-                                    </span>
-                                    </li>`
+                                    </div>
+                                    </div>`
                 } else {
                     temp_html = ``
                 }
