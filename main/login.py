@@ -75,9 +75,9 @@ def user_login():
         payload = {
             'id': id_receive,
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
+    # 찾지 못하면 .decode('utf-8')
     else:
         return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})

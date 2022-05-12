@@ -5,5 +5,5 @@ function to_main(){
 
 // 노래 상세페이지로 이동
 function to_detail(){
-    window.location.href="/music/${musicId}"
+    window.location.href="/detail?rank=${rank}&title=${title}&singer=${singer}&album=${album}&cover=${cover}";
 }
