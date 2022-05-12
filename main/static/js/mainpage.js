@@ -23,7 +23,7 @@ function show_list() {
                             <th scope="row" >${rank}</th>
                             <td  >${title.replace(/%27/gi,"\'")}</td> //replace함수를 이용해서 '를 표현가능
                             <td >${singer.replace(/%27/gi,"\'")}</td>
-                            <td ><img src="${cover}"></td>
+                            <td ><img class="coverphoto" src="${cover}"></td>
                             <td >${album.replace(/%27/gi,"\'")}</td>
                             
 
