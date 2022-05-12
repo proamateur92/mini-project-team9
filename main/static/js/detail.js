@@ -43,7 +43,7 @@ function add() {
     });
 }
 
-<<<<<<< HEAD
+
 function submit() {
     if($('#comment').val().trim() == '') {
         alert('리뷰를 작성해주세요');
@@ -76,5 +76,4 @@ function submit() {
     })
 }
 
-=======
->>>>>>> 3778ac59c11c3c1bd5d45a75eaba957074ed5512
+
