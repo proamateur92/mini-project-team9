@@ -33,8 +33,13 @@
 }
 
 
-.categori {
+.category {
     color: gray;
+    border-bottom: 2px solid #444444;
+    border-top: 2px solid #444444;
+    padding: 10px;
+
+
 }
 
 .mycards {
@@ -84,7 +89,7 @@ table, th, td {
   th {
       vertical-align: middle; /*글자들 세로 줄맞추기*/
       text-align: center;      /*글자들 가로 줄 맞추기*/
-      font-size: 20px;
+      font-size: 40px;
 
   }
   td {
@@ -95,9 +100,20 @@ table, th, td {
 
   }
 
+  /*글자 모양이 망가지는걸 방지하기 위한 최소 width값 설정*/
 .header_list {
+        min-width: 56px;
+        width: 100px;
+        font-size: 35px;
+        margin: 0 auto;
 
-    font-size: 20px;
+}
+
+.rank_list{
+
+    margin-left: auto;
+    margin-right: 10px;
+
 }
 
 .coverphoto {
@@ -109,14 +125,7 @@ table>table-hover {
     background-color: white;
 }
 
-.header__container {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../image/cover.jpg');
-    background-position: center;
-    background-size: cover;
-}
+
 
 /*마이페이지 버튼과 로그아웃 버튼에 호버를 넣어서 보기쉽게 설정*/
 
-.nav__list:hover {
-    color: white;
-}

@@ -43,45 +43,29 @@
         </div>
     </header>
     <div>
-
-
 <!--  마이페이지 제일 큰 틀  -->
-    <div class="mypli">
-        <h1 style="font-size: 40px; color: red">{{ id }}님의 플레이리스트</h1>
-        <div class="artist-main-info">
-            <div class="test">
-                <div class="card">
-                    {% for i in mypli %}
-
-    {#                    <h1>{{ i['id'] }}<h1>#}
-    {#                    {{ i['index'] }}#}
-                        <img src="{{ i['cover'] }}"  alt="앨범커버" class="image" style="width:20%"/>
-                            <div class="inner-content">
-                                <div class="title">{{ i['title'] }}<br>
-                                    {{ i['singer'] }}<br>
-                                    {{ i['album'] }}
+        <div class="mypli">
+            <div class="empty-box"></div>
+            <hr>
+            <h1 style="font-size: 70px; color: lightblue">{{ id }}님의 플레이리스트</h1>
+            <hr>
+            <div class="artist-main-info">
+                <div class="test">
+                    <div class="box-wrap">
+                        {% for i in mypli %}
+                            <div class="box" onclick="to_detail()">
+                                <div class="img">
+                                    <img src="{{ i['cover'] }}" alt="앨범커버" class="image" style="width:100%"/>
                                 </div>
-                                <div class="text">{{ i['title'] }} <br>
-                                    {{ i['singer'] }}<br>
-                                    {{ i['album'] }}</div>
+                                <div class="info">
+                                    <h3>{{ i['title'] }}</h3>
+                                    <p>{{ i['singer'] }}<br>
+                                        {{ i['album'] }}</p>
+                                </div>
                             </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
-    {#            <div class="album">1번</div>#}
-    {#            <div class="album">2번</div>#}
-    {#            <div class="album special">#}
-    {#                <span>앨범명</span>#}
-    {#                <span>곡 제목</span>#}
-    {#                <span>가수명</span>#}
-    {#            </div>#}
-    {#            <div class="album">3번</div>#}
-    {#            <div class="album">4번</div>#}
-            </div>
-
-
-            <div class="mylike" >
-<!--           밑에 내가 추가한 노래 목록 -->
-
             </div>
         </div>
     </div>
