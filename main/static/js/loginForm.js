@@ -21,7 +21,6 @@ function login() {
 let isJoin = false;
 
 function blockJoin() {
-    console.log(isJoin);
     isJoin = false;
 }
 
@@ -73,6 +72,7 @@ function is_password(asValue) {
 }
 
 function join() {
+    alert('aaaaaaaaaaaaaaaaaaaaaaaaaa')
     if($('#userid').val() === '') {
         alert('아이디를 입력해주세요.');
         $('#userid').focus();
@@ -89,36 +89,37 @@ function join() {
         alert('비밀번호를 입력해주세요.');
         $('#userpw').focus();
         return;
+    }
 
-        if ($('#userpw2').val() === '') {
+    if ($('#userpw2').val() === '') {
             alert('비밀번호를 입력해주세요.');
             $('#userpw2').focus();
             return;
         }
 
-        if (!is_password($('#userpw').val())) {
-            alert('영문과 숫자는 최소 1개 포함되어야 합니다.(8~20 글자)');
-            $('#userid').focus();
-            return;
-        }
-        if (!isJoin) {
-            alert('아이디 중복 체크해주세요');
-            return;
-        }
-
-        if (!($('#userpw').val() == $('#userpw2').val())) {
-            alert('비밀번호가 일치하지 않습니다.');
-            return;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: 'user/register',
-            data: {'id_give': $('#userid').val(), 'pw_give': $('#userpw').val()},
-            success: (response) => {
-                alert(response.msg);
-                location.reload();
-            }
-        })
+    if (!is_password($('#userpw').val())) {
+        alert('영문과 숫자는 최소 1개 포함되어야 합니다.(8~20 글자)');
+        $('#userid').focus();
+        return;
     }
+
+    if (!isJoin) {
+        alert('아이디 중복 체크해주세요');
+        return;
+    }
+
+    if (!($('#userpw').val() == $('#userpw2').val())) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: 'user/register',
+        data: {'id_give': $('#userid').val(), 'pw_give': $('#userpw').val()},
+        success: (response) => {
+            alert(response.msg);
+            location.reload();
+        }
+    })
 }
