@@ -12,6 +12,50 @@
     <link rel="stylesheet" type="text/css" href="../static/css/screen/detail.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <title>뮤플리 - 상세페이지</title>
+    <script>
+        function get() {
+            let cover = "{{cover}}"
+            let singer = "{{singer}}"
+            let album = "{{album}}"
+            let title = "{{title}}"
+            $.ajax({
+                type: "POST",
+                url: "/detail",
+                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
+                success: function (response) {
+                     if (response.result == 'fail') {
+                        alert(response['msg']);
+                        location.href = '/loginForm';
+                    } else {
+                        alert('담기에 성공하셨습니다.');
+                        location.reload();
+                    }
+                }
+            })
+        }
+
+        function remove() {
+            let cover = "{{cover}}"
+            let singer = "{{singer}}"
+            let album = "{{album}}"
+            let title = "{{title}}"
+
+            $.ajax({
+                type: "POST",
+                url: "/detail",
+                data: {cover_give: cover, title_give: title, singer_give: singer, album_give: album},
+                success: function (response) {
+                     if (response.result == 'fail') {
+                        alert(response['msg']);
+                        location.href = '/loginForm';
+                    } else {
+                        alert('취소에 성공하셨습니다.');
+                        location.reload();
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -71,8 +115,11 @@
                 {% if done == 0 %}
                     <button onclick="remove({{ rank }})">등록 취소</button>
                 {% else %}
-                    <button onclick="get()">등록</button>
+                    <button onclick="get()" >등록 </button>
                 {% endif %}
+            </li>
+            <li>
+                <button onclick="remove({{ rank }})">등록 취소</button>
             </li>
             <!--
             <li>
