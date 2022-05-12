@@ -98,6 +98,7 @@
                  style="margin-right: 30px;">
         </div>
         <div class="song-info" id="song-info">
+            <p class="title-size">{{title}}</p>
             <li class="list">
                     <span class="attr">
                         가수명
@@ -116,9 +117,9 @@
             </li>
             <li>
                 {% if done != 0 %}
-                    <button type="button" onclick="get()" >등록 </button>
+                    <button type="button" onclick="get()" class="add">등록 </button>
                 {% else %}
-                    <button type="button" onclick="remove()">등록 취소</button>
+                    <button type="button" onclick="remove()" class="add">등록 취소</button>
                 {% endif %}
             </li>
         </div>
@@ -142,7 +143,7 @@
     </div>
     <hr>
     <div class="footer" id="footer">
-        <h3>리뷰 작성</h3>
+        <p class="review-footer">리뷰 작성</p>
         <div class="input">
             <input class="text" id="comment">
             <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">

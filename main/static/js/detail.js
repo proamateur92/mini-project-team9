@@ -49,9 +49,15 @@ function submit() {
 
         data: {comment_give: comment, star_give: star, rank_give: rank},
         success: function (response) {
-            if (response.result == 'fail') {
-                alert(response['msg']);
-                location.href = '/loginForm';
+            if ($.trim($('#comment').val())=='') {
+                alert("리뷰를 입력해주세요");
+                $("#comment").focus();
+                return;
+            }
+            if ($.trim($("input[name='rating']:checked").val())=='') {
+                alert("별점을 입력해주세요");
+                $("#comment").focus();
+                return;
             } else {
                 alert('리뷰를 등록하였습니다.');
                 location.reload();
