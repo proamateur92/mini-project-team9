@@ -72,12 +72,14 @@ def get():
         singer_receive = request.form['singer_give']
 
 
+
         # 아이디 별로 index + 1
         mymusic_index = list(db.mymusic.find({'id':id}))
         count = len(mymusic_index) + 1
 
         doc = {
             'id': id,
+
             'index': count,
             'cover': cover_receive,
             'title': title_receive,
@@ -99,8 +101,9 @@ def remove():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-       
+
         id = db.user.find_one({"id": payload['id']})['id']
+
         db.mymusic.delete_one({'id': payload['id']})
         # 아이디 별로 index + 1
 

@@ -18,6 +18,7 @@
             let singer = "{{singer}}"
             let album = "{{album}}"
             let title = "{{title}}"
+
             $.ajax({
                 type: "POST",
                 url: "/detail",
@@ -95,6 +96,7 @@
                  style="margin-right: 30px;">
         </div>
         <div class="song-info" id="song-info">
+            <p class = "title-size">{{title}}</p>
             <li class="list">
                     <span class="attr">
                         가수명
@@ -111,15 +113,15 @@
                         {{ album }}
                     </span>
             </li>
-            <li>
+            <li class="position-btn">
                 {% if done == 0 %}
-                    <button type="button" onclick="remove( {{ id }} )">등록 취소</button>
+                    <button type="button" onclick="remove()">등록 취소</button>
                 {% else %}
                     <button type="button" onclick="get()" >등록 </button>
                 {% endif %}
             </li>
             <li>
-                <button type="button" onclick="remove({{ rank }})">등록 취소</button>
+                <button type="button" onclick="remove()">등록 취소</button>
             </li>
             <!--
             <li>
@@ -128,26 +130,27 @@
             -->
         </div>
     </div>
-    <hr>
+
     <div class="review">
         <h2 class="txt">리뷰 모음</h2>
         <div class="review-moeum" id="review-box">
             <li class="review-doc">
-                    <span class="review-text" id="review-id">
-                        닉네임
-                    </span>
+                <span class="review-text" id="review-id">
+                    닉네임
+                </span>
                 <span class="review-text" id="review-comment">
-                        코멘트
-                    </span>
+                    코멘트
+                </span>
                 <span class="review-text" id="review-star">
-                        별점
-                    </span>
+                    별점
+                </span>
             </li>
+            <hr>
         </div>
     </div>
     <hr>
     <div class="footer" id="footer">
-        <h3>리뷰 작성</h3>
+        <p class="review-size">리뷰 작성</p>
         <div class="input">
             <input class="text" id="comment">
             <form name="form" id="myform" method="post" action="./save" style="margin-left: 20px;">
