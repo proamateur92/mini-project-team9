@@ -2,6 +2,7 @@ $(document).ready(function () {
     add();
 });
 function add() {
+
     $.ajax({
         type: "GET",
         url: "/review",
@@ -13,6 +14,10 @@ function add() {
                 let comment = rows[i]['comment']
                 let star = rows[i]['star']
                 let id = rows[i]['id']
+                let year = rows[i]['year']
+                let month = rows[i]['month']
+                let date = rows[i]['date']
+
 
                 let star_image = '⭐'.repeat(star)
 
@@ -22,7 +27,7 @@ function add() {
                     temp_html = ` 
                                     <div class="review-box">
                                     <div class="review-header">
-                                    <p class = "span-grid"><span class="id-span">${id}</span> <span style="color: lightgray;">|</span> <span class="id-time">날짜</span> <span style="color: lightgray;">|</span> <span class="get-star">${star_image}</span></p>
+                                    <p class = "span-grid"><span class="id-span">${id}</span> <span style="color: lightgray;">|</span> <span class="id-time">${year}.${month}.${date}</span> <span style="color: lightgray;">|</span> <span class="get-star">${star_image}</span></p>
                                     </div>
                                     <hr>
                                     <div class="review-footer">
@@ -49,6 +54,11 @@ function submit() {
         alert('별점을 입력해주세요');
         return
     }
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
 
     let comment = $('#comment').val();
     let star = $("input[name='rating']:checked").val();
@@ -57,7 +67,7 @@ function submit() {
         type: "POST",
         url: "/review",
 
-        data: {comment_give: comment, star_give: star, rank_give: rank},
+        data: {comment_give: comment, star_give: star, rank_give: rank, year_give: year, month_give: month, date_give: date},
         success: function (response) {
             alert('리뷰를 등록하였습니다.');
             location.reload();
