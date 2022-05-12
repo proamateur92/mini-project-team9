@@ -44,7 +44,7 @@
 }
 
 .empty-box{
-	height:250px;
+	height:125px;
 }
 
 .test {
@@ -75,12 +75,13 @@
 	/*box-sizing:border-box;*/
 	/*-webkit-box-sizing:border-box;*/
 	/*-moz-box-sizing:border-box;*/
+	background-attachment: fixed;
 	position: relative;
-
+	size:fixed;
 	background-size: inherit;
-	background: #000;
+	background: hotpink;
 	width: 350px; height: 350px;
-	border: 5px solid #000000;
+	border: 5px solid lightblue;
 	cursor: pointer;
 	overflow: hidden;
 	box-shadow: 1px 8px 3px rgba(0,0,0,0.6);
@@ -90,13 +91,16 @@
 	transition: all 0.3s ease-in-out;
 }
 .box:before {
+	background-attachment: fixed;
 	content: '';
 	background: #fff;
 	width: 0px; height: 1px;
 	position: absolute; right: 20px; top: 20px;
 	transition: all 0.35s ease;
+	background-attachment: fixed;
 }
 .box:after {
+	background-attachment: fixed;
 	content: '';
 	background: #fff;
 	width: 1px; height: 0px;
@@ -105,12 +109,15 @@
 }
 
 .box .info {
+
 	position: absolute; left: 0; bottom: 0;
 	color: #fff;
 	width: 400px;
 	background-size: inherit;
+	background-attachment: fixed;
 	padding: 15px;
 
+	background-attachment: fixed;
 
 	size: 400px 400px;
 	opacity: 0;
