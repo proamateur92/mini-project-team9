@@ -23,10 +23,6 @@
 
 <br>
 
-[![*'s github stats](https://github-readme-stats.vercel.app/api?username=Yudove)](https://github.com/Yudove/mini-project-team9)
-
-<br>
-
 ## 2. 사용기술 
 ![Tistory Badge](https://img.shields.io/badge/BackEnd-555263?style=flat&logoColor=white) <br>
 <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/flask-000000?style=for-the-badge&logo=flask&logoColor=white"> <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
@@ -87,7 +83,12 @@
 
 <br>
 
-## 5. 링크
+## 5. 시연영상
+### YOUTUBE: https://youtu.be/xv2xwPUOLWY
+
+<br>
+
+## 6. 링크
 ### SA:https://waryongc.tistory.com/14
 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=footer)
