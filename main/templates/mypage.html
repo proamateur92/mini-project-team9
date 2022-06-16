@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+{#    헤드입니다#}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://kit.fontawesome.com/c1651245ed.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/screen/mypage.css">
+    <script src="../static/js/logout.js"></script>
+    <script src="../static/js/mypage.js"><</script>
+    <title>뮤플리 - 마이페이지</title>
+    </head>
+<body>
+    <header>
+        <div class="header__container">
+            <div class="logo">
+                <a href="/"><i class="fa-brands fa-spotify fa-4x"></i></a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__item">
+                    {% set token = token %}
+                    {% if token %}
+                        <a href="/">
+                            <li class="nav__list">메인페이지</li>
+                        </a>
+                        <a>
+                            <li id="logout" onclick="logout()" class="nav__list">로그아웃</li>
+                        </a>
+                    {% else %}
+                        <a href="/">
+                            <li class="nav__list">메인페이지</li>
+                        </a>
+                        <a href="/loginForm">
+                            <li class="nav__list">로그인</li>
+                        </a>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div>
+<!--  마이페이지 제일 큰 틀  -->
+        <div class="mypli">
+            <div class="empty-box"></div>
+            <hr>
+            <h1 style="font-size: 70px; color: pink">{{ id }}님의 플레이리스트</h1>
+            <hr>
+            <div class="artist-main-info">
+                <div class="test">
+                    <div class="box-wrap">
+                        {% for i in mypli %}
+                            <div class="box" onclick="to_detail()">
+                                <div class="img">
+                                    <img src="{{ i['cover'] }}" alt="앨범커버" class="image" style="width:100%"/>
+                                </div>
+                                <div class="info">
+                                    <h3>{{ i['title'] }}</h3>
+                                    <p>{{ i['singer'] }}<br>
+                                        {{ i['album'] }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

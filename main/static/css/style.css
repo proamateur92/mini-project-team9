@@ -1,0 +1,22 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
+@import url('./screen/login.css');
+@import url('./component/header.css');
+@import url('./reset.css');
+:root {
+    /*color*/
+    --main-light-color: #ffeeff;
+    --main-color: #f8bbd0;
+    --main-dark-color: #c48b9f;
+    --white: #ffffff;
+    --black: #000000;
+    --light-gray: #fafafa;
+    --normal-gray: #c5c5c5;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+

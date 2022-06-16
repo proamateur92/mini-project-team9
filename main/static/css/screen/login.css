@@ -1,0 +1,72 @@
+.wrap {
+    width: 100%;
+    height: 100%;
+    background:  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../image/cover.jpg") center/cover no-repeat;
+}
+
+.hidden {
+    display: none;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
+}
+
+.login-title {
+    font-size: 95px;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    margin-top: 10px;
+    background-color: inherit;
+    border-bottom: 1px solid var(--white);
+    color: var(--white);
+    font-size: 35px;
+}
+
+.login-container input::placeholder {
+    color: var(--white);
+    font-size: 35px;
+}
+
+.button-container {
+    margin-top: 10px;
+}
+
+.login-id {
+    position: relative;
+}
+
+.id-checker {
+    position: absolute;
+    margin-top: -66px;
+    margin-left: 200px;
+    background-color: var(--main-color);
+    color: var(--white);
+    transition: all 200ms ease-in-out;
+}
+
+.button-container button {
+    cursor: pointer;
+    font-size: 35px;
+    background-color: var(--main-color);
+    color: var(--white);
+    margin: 5px 4px;
+    transition: all 200ms ease-in-out;
+}
+
+.button-container button:hover,
+.id-checker:hover {
+    background-color: var(--main-dark-color);
+    color: var(--light-gray);
+    transform: scale(1.1);
+}
